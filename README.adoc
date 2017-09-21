@@ -1,0 +1,5 @@
+= spring-examples image:https://travis-ci.org/daggerok/spring-examples.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/spring-examples"]
+
+This repository is contains some spring / spring-boot playground projects
+
+. link:01-spring-boot-under-the-hood/[Spring boot conditions, auto-configurations and custom starter]
