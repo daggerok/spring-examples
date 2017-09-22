@@ -8,14 +8,15 @@ npm t
 npm start
 npm run lint
 npm run build
-npm run serve-browser-sync
 npm run serve
 ```
 
 update npm versions carefully
 
-some requirements
+some requirements (I just don't want fix webpack config again...)
+
 ```bash
-webpack < 3
+extract-text-webpack-plugin < 3
 postcss < 6
+webpack < 3
 ```
