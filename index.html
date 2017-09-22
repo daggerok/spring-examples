@@ -521,12 +521,13 @@ table.CodeRay td.code>pre{padding:0}
 <div class="details">
 <span id="author" class="author">{author} &lt;daggerok@gmail.com&gt;</span><br>
 <span id="revnumber">version 0.0.1,</span>
-<span id="revdate">2017-09-22 05:13:56 EEST</span>
+<span id="revdate">2017-09-22 05:52:18 EEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#links">1. links</a></li>
+<li><a href="#includes">1. Includes</a></li>
+<li><a href="#links">2. links</a></li>
 <li><a href="#enjoy">Enjoy! :)</a></li>
 </ul>
 </div>
@@ -563,7 +564,137 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div class="sect1">
-<h2 id="links">1. links</h2>
+<h2 id="includes">1. Includes</h2>
+<div class="sectionbody">
+<div class="exampleblock">
+<div class="title">include::subprojects/01-spring-boot-under-the-hood.adoc[]</div>
+<div class="content">
+<div class="paragraph">
+<p>= spring-boot under the hood</p>
+</div>
+<div class="paragraph">
+<p>This example is about spring-boot in general, not only 5th&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>== build and run</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">bash gradlew -t bootRun</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>== spring-boot POWER</p>
+</div>
+<div class="listingblock">
+<div class="title">out-of-the-box conditions</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// check if bean is in spring factory:</span>
+<span class="annotation">@OnBeanCondition</span>
+
+<span class="comment">// check if class is in classpath:</span>
+<span class="annotation">@OnClassCondition</span>
+
+<span class="comment">// on thruthy evaluated express condition:</span>
+<span class="annotation">@OnExpressionCondition</span>
+
+<span class="comment">// on expected java version</span>
+<span class="annotation">@OnJavaCondition</span>
+
+<span class="comment">// on expected JNDI branch</span>
+<span class="annotation">@OnJndiCondition</span>
+
+<span class="comment">// check if property exists</span>
+<span class="annotation">@OnPropertyCondition</span>
+
+<span class="comment">// check if resource exists</span>
+<span class="annotation">@OnResourceCondition</span>
+
+<span class="comment">// check if WebApplicationContext exists</span>
+<span class="annotation">@OnWebApplicationCondition</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">additional conditions for combine or merge them together</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// AND condition</span>
+<span class="annotation">@AllNestedConditions</span>
+
+<span class="comment">// OR condition</span>
+<span class="annotation">@AnyNestedConditions</span>
+
+<span class="comment">// NOT condition</span>
+<span class="annotation">@NoneNestedConditions</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>== own starters</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>create a starter configuration with provided by you custom functionality.
+In our case it&#8217;s kind of Java analog for JSON.stringify / JSON.parse from JS.</p>
+</li>
+<li>
+<p>create src/main/resources/META-INF/spring.factories file</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="title">src/main/resources/META-INF/spring.factories</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="properties"></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>TODO: finish readme&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>links:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="https://www.brighttalk.com/webcast/14893/252475">watch</a></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">include::subprojects/02-sse-emitter.adoc[]</div>
+<div class="content">
+<div class="paragraph">
+<p>= Server Side Events</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">curl localhost:8080/subscriptions # terminal 1
+http --timeout 2629746000 --stream :8080/subscriptions # terminal 2
+http post :8080/subscriptions/broadcast message=&quot;trololo&quot; # send message to all subscribers
+http delete :8080/subscriptions/2017-09-22-01-18-22-693 # unsubscribe by id</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>links:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="https://golb.hplar.ch/p/Server-Sent-Events-with-Spring">Link</a></p>
+</li>
+<li>
+<p><a href="https://infinitescript.com/2015/06/use-server-sent-event-in-spring-4-2/">Other link</a></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="links">2. links</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -589,7 +720,7 @@ table.CodeRay td.code>pre{padding:0}
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2017-09-22 05:13:56 EEST
+Last updated 2017-09-22 05:52:18 EEST
 </div>
 </div>
 </body>
