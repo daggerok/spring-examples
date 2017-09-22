@@ -522,15 +522,23 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">Maksim Kostromin</span><br>
 <span id="email" class="email"><a href="mailto:daggerok@gmail.com">daggerok@gmail.com</a></span><br>
 <span id="revnumber">version 0.0.1,</span>
-<span id="revdate">2017-09-22 06:11:09 EEST</span>
+<span id="revdate">2017-09-22 06:12:54 EEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#includes">1. Includes</a></li>
+<li><a href="#includes">1. Includes</a>
+<ul class="sectlevel2">
+<li><a href="#spring-boot-under-the-hood">1.1. spring-boot under the hood</a></li>
+</ul>
+</li>
 <li><a href="#build-and-run">2. build and run</a></li>
 <li><a href="#spring-boot-power">3. spring-boot POWER</a></li>
-<li><a href="#own-starters">4. own starters</a></li>
+<li><a href="#own-starters">4. own starters</a>
+<ul class="sectlevel2">
+<li><a href="#server-side-events-sse-emitter">4.1. server-side events / sse emitter</a></li>
+</ul>
+</li>
 <li><a href="#links">5. links</a></li>
 <li><a href="#enjoy">Enjoy! :)</a></li>
 </ul>
@@ -545,7 +553,10 @@ table.CodeRay td.code>pre{padding:0}
 <div class="sect1">
 <h2 id="includes">1. Includes</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="spring-boot-under-the-hood">1.1. spring-boot under the hood</h3>
 
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -637,12 +648,14 @@ In our case it&#8217;s kind of Java analog for JSON.stringify / JSON.parse from 
 </li>
 </ol>
 </div>
+<div class="sect2">
+<h3 id="server-side-events-sse-emitter">4.1. server-side events / sse emitter</h3>
 <div class="listingblock">
 <div class="content">
-<pre>curl localhost:8080/subscriptions # terminal 1
+<pre class="CodeRay highlight"><code data-lang="bash">curl localhost:8080/subscriptions # terminal 1
 http --timeout 2629746000 --stream :8080/subscriptions # terminal 2
-http post :8080/subscriptions/broadcast message="trololo" # send message to all subscribers
-http delete :8080/subscriptions/2017-09-22-01-18-22-693 # unsubscribe by id</pre>
+http post :8080/subscriptions/broadcast message=&quot;trololo&quot; # send message to all subscribers
+http delete :8080/subscriptions/2017-09-22-01-18-22-693 # unsubscribe by id</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -657,6 +670,7 @@ http delete :8080/subscriptions/2017-09-22-01-18-22-693 # unsubscribe by id</pre
 <p><a href="https://infinitescript.com/2015/06/use-server-sent-event-in-spring-4-2/">Other link</a></p>
 </li>
 </ol>
+</div>
 </div>
 </div>
 </div>
@@ -687,7 +701,7 @@ http delete :8080/subscriptions/2017-09-22-01-18-22-693 # unsubscribe by id</pre
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2017-09-22 06:11:09 EEST
+Last updated 2017-09-22 06:12:54 EEST
 </div>
 </div>
 </body>
