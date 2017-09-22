@@ -1,2 +1,3 @@
 include ":spring-boot-webpack"
 include ":spring-boot-webpack:ui"
+include ":spring-boot-wro4j"

@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: web
+  profiles:
+    include:
+      - mustache
+
