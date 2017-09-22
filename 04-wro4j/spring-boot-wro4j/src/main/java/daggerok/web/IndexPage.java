@@ -11,6 +11,6 @@ public class IndexPage {
       "/404"
   })
   public String index() {
-    return "/index.html";
+    return "index";
   }
 }

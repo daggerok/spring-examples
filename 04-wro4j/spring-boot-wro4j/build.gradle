@@ -1,3 +1,15 @@
+repositories {
+  mavenCentral()
+  jcenter()
+}
+
 dependencies {
   compile "org.springframework.boot:spring-boot-starter-mustache"
+  compile "org.webjars:webjars-locator:0.32-1"
+  compile "org.webjars.npm:jquery:3.2.1"
+  compile "org.webjars.npm:tether:1.4.0"
+  compile "org.webjars.npm:bootstrap:4.0.0-alpha.6"
+  compile "org.webjars.npm:bootswatch:4.0.0-alpha.6"
+  compile "org.webjars.npm:angular:1.6.5"
+  compile "org.webjars.npm:types__angular:1.6.25"
 }
