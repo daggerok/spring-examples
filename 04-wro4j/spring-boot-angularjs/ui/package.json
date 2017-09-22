@@ -28,7 +28,7 @@
     "jquery": "3.2.1"
   },
   "devDependencies": {
-    "@types/jasmine": "2.5.43",
+    "@types/jasmine": "2.6.0",
     "angular-mocks": "1.6.6",
     "autoprefixer": "7.1.4",
     "babel-cli": "6.26.0",
@@ -57,10 +57,10 @@
     "faker": "4.1.0",
     "file-loader": "0.11.2",
     "html-webpack-plugin": "2.30.1",
-    "jasmine": "2.5.3",
+    "jasmine": "2.8.0",
     "json-loader": "0.5.7",
-    "karma": "1.5.0",
-    "karma-chrome-launcher": "2.0.0",
+    "karma": "1.7.1",
+    "karma-chrome-launcher": "2.2.0",
     "karma-jasmine": "1.1.0",
     "livereload": "0.6.2",
     "ng-annotate-loader": "0.6.1",
