@@ -1,0 +1,27 @@
+= spring-examples {project-name} ({project-version}) image:https://travis-ci.org/daggerok/spring-examples.svg?branch=master["Build Status", link={github_url}]
+Maksim Kostromin <daggerok@gmail.com>
+{docdatetime}
+:toc:
+:revnumber: {project-version}
+:example-caption!:
+ifndef::sourcedir[:sourcedir: ../../..]
+:icons: font
+:toc: left
+:numbered:
+:github_url: https://github.com/daggerok/spring-examples
+:github_project_path: {github_url}/tree/master
+
+[discrete]
+== Introduction
+include::includes/Introduction.adoc[]
+
+== spring-boot under the hood
+include::../../01-spring-boot-under-the-hood/README.adoc[tags=content01]
+
+== server-side events / sse emitter
+include::../../02-sse-emitter/README.adoc[tags=content02]
+
+== links
+include::includes/Links.adoc[]
+
+== Enjoy! :)

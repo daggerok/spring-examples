@@ -2,14 +2,16 @@
 
 This example is about spring-boot in general, not only 5th...
 
-== build and run
+//tag::content01[]
+
+=== build and run
 
 [source,bash]
 ----
 bash gradlew -t bootRun
 ----
 
-== spring-boot POWER
+=== spring-boot POWER
 
 .out-of-the-box conditions
 [source,java]
@@ -52,7 +54,7 @@ bash gradlew -t bootRun
 @NoneNestedConditions
 ----
 
-== own starters
+=== own starters
 
 . create a starter configuration with provided by you custom functionality.
 In our case it's kind of Java analog for JSON.stringify / JSON.parse from JS.
@@ -67,6 +69,8 @@ In our case it's kind of Java analog for JSON.stringify / JSON.parse from JS.
 
 TODO: finish readme...
 
-links:
+=== links
 
 . link:https://www.brighttalk.com/webcast/14893/252475[watch]
+
+//end::content01[]

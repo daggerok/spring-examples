@@ -1,5 +1,9 @@
 = Server Side Events
 
+//tag::content02[]
+
+=== test
+
 [source,bash]
 ----
 curl localhost:8080/subscriptions # terminal 1
@@ -8,7 +12,9 @@ http post :8080/subscriptions/broadcast message="trololo" # send message to all 
 http delete :8080/subscriptions/2017-09-22-01-18-22-693 # unsubscribe by id
 ----
 
-links:
+=== links
 
 . link:https://golb.hplar.ch/p/Server-Sent-Events-with-Spring[Link]
 . link:https://infinitescript.com/2015/06/use-server-sent-event-in-spring-4-2/[Other link]
+
+//end::content02[]
