@@ -32,7 +32,6 @@ test {
   dependsOn yarn_test, yarn_lint
 }
 
-///*
 clean.doFirst {
   [
       "etc",
@@ -41,6 +40,5 @@ clean.doFirst {
       "node_modules",
   ].each { delete "${projectDir.getAbsolutePath()}/$it" }
 }
-//*/
 
 bootRepackage.enabled = false

@@ -13,7 +13,6 @@ const application = angular.module('app', [
   ComponentsModule.name,
 ]);
 
-// just for karma testing weh error about tag base is required occurs:
 if (process && process.env && process.env.DEVELOPMENT) {
   require('./infrastructure/base.href.config');
 }
