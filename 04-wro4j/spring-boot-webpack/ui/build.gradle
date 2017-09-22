@@ -37,6 +37,7 @@ clean.doFirst {
       "etc",
       "dist",
       "build",
+      ".gradle",
       "node_modules",
   ].each { delete "${projectDir.getAbsolutePath()}/$it" }
 }

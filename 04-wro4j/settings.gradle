@@ -1,2 +1,2 @@
-include ":spring-boot-angularjs"
-include ":spring-boot-angularjs:ui"
+include ":spring-boot-webpack"
+include ":spring-boot-webpack:ui"

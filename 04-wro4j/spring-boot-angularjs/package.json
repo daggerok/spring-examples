@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "autoprefixer": "7.1.4",
-    "cssnano": "3.10.0",
-    "postcss-cssnext": "3.0.2",
-    "postcss-import": "11.0.0"
-  }
-}

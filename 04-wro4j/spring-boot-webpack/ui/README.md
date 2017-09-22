@@ -1,4 +1,4 @@
-# angularjs [![build](https://travis-ci.org/daggerok/angularjs.svg?branch=master)](https://travis-ci.org/daggerok/angularjs)
+# ui
 
 bundle angularjs using webpack2
 
@@ -15,7 +15,13 @@ update npm versions carefully
 
 some requirements (I just don't want fix webpack config again...)
 
-```bash
 extract-text-webpack-plugin < 3
 webpack < 3
+
+do not update them...
+
+```bash
+ncu
+ extract-text-webpack-plugin  2.1.2  →  3.0.0 
+ webpack                      2.7.0  →  3.6.0 
 ```
