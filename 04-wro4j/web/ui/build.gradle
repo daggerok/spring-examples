@@ -1,0 +1,56 @@
+plugins {
+  id "java"
+  id "com.moowork.node" version "1.2.0"
+}
+
+ext {
+  sourceCompatibility = JavaVersion.VERSION_1_8
+  targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+jar {
+  baseName = "ui"
+  version = "0.0.1"
+}
+
+repositories {
+  mavenCentral()
+}
+
+node {
+  download = true
+  version = "6.11.3"
+  npmVersion = "5.0.3"
+  yarnVersion = "0.24.5"
+}
+/*
+node {
+  // LTS
+  version = "6.9.2"
+  npmVersion = "3.10.9"
+  // // https://github.com/srs/gradle-node-plugin/issues/171
+  // download = true
+}
+*/
+
+assemble.dependsOn yarn_build
+yarn_build.dependsOn yarn_install
+yarn_install.dependsOn yarn_cache_clean
+
+
+test {
+  dependsOn yarn_test, yarn_lint
+}
+
+/*
+clean.doFirst {
+  [
+      "etc",
+      "dist",
+      "build",
+      "node_modules",
+  ].each { delete "${projectDir.getAbsolutePath()}/$it" }
+}
+*/
+
+bootRepackage.enabled = false

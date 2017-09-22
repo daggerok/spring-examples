@@ -1,9 +1,13 @@
+!.gotkeep
+
 .DS_Store
 .gradle/
-!gradle/wrapper/gradle-wrapper.jar
+!gradle-wrapper.jar
 
 build/
 out/
+*src/main/resources/public*
+*src/main/resources/static*
 
 ### STS ###
 .apt_generated
@@ -27,4 +31,6 @@ nbdist/
 .nb-gradle/
 
 node_modules/
+bower_components/
 yarn.lock
+package-lock.json

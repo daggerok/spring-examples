@@ -1,0 +1,19 @@
+= Web assets optimization using wro4j
+
+//tag::content[]
+
+=== test
+
+.bootstrap app
+[source,bash]
+----
+bash gradlew clean build bootRun
+----
+
+.sucess response response
+[source,bash]
+----
+http :8080                                                                                             09:32:02
+----
+
+//end::content[]

@@ -8,9 +8,17 @@ jdk:
 
 install: true
 before_install:
+  - sudo apt update
+
+  # frontend tests
+  - export CHROME_BIN=/usr/bin/google-chrome
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - sudo apt install -y libappindicator1 fonts-liberation
+  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  - sudo dpkg -i google-chrome*.deb
 
   # install docker-compose
-  - sudo apt update
   - sudo apt install -y python-pip curl jq libxml2-utils
   - sudo pip install docker-compose httpie
   - sudo usermod -aG docker $(whoami)
@@ -25,6 +33,7 @@ script:
   - export ROOT=$PWD
   - >
     for path in \
+      04-wro4j \
       03-retry \
       02-sse-emitter \
       01-spring-boot-under-the-hood \

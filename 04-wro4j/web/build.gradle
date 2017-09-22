@@ -1,0 +1,6 @@
+dependencies {
+  compile "org.springframework.boot:spring-boot-starter-mustache"
+}
+
+assemble.dependsOn ":web:ui:build"
+assemble.shouldRunAfter clean, ":web:ui:build"
