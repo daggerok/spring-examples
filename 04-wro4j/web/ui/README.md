@@ -8,10 +8,8 @@ npm t
 npm start
 npm run lint
 npm run build
+npm run serve-browser-sync
 npm run serve
-npm run ghpages
-npm run ghserve
-fish bin/gh-pages.fish
 ```
 
 
