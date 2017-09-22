@@ -19,7 +19,7 @@ repositories {
 
 node {
   download = true
-  version = "6.11.3"
+  version = "6.9.1"
   npmVersion = "5.0.3"
   yarnVersion = "0.24.5"
 }
@@ -42,7 +42,9 @@ test {
   dependsOn yarn_test, yarn_lint
 }
 
-/*
+//clean.dependsOn yarn_rimraf
+
+///*
 clean.doFirst {
   [
       "etc",
@@ -51,6 +53,6 @@ clean.doFirst {
       "node_modules",
   ].each { delete "${projectDir.getAbsolutePath()}/$it" }
 }
-*/
+//*/
 
 bootRepackage.enabled = false

@@ -12,10 +12,10 @@ npm run serve-browser-sync
 npm run serve
 ```
 
+update npm versions carefully
 
-update npm versions
-
+some requirements
 ```bash
-npm i -g npm-check-updates
-ncu -u
+webpack < 3
+postcss < 6
 ```
