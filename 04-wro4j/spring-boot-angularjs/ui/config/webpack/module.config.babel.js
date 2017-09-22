@@ -11,13 +11,22 @@ const assets = /\.(raw|gif|png|jpg|jpeg|otf|eot|woff|woff2|ttf|svg|ico)$/i;
 const cssLoader = env => ExtractTextWebpackPlugin.extract({
   publicPath,
   fallback: 'style-loader',
-  use: `css-loader?importLoader=1${minimize(env)}!postcss-loader?sourceMap=inline`,
+  // use: `css-loader?importLoader=1${minimize(env)}!postcss-loader?sourceMap=inline`,
+  use: [
+    `css-loader?importLoader=2${minimize(env)}`,
+    `postcss-loader?sourceMap=inline&config.path=./config.postcss.config.js`,
+  ],
 });
 
 const stylusLoader = env => ExtractTextWebpackPlugin.extract({
   publicPath,
   fallback: 'style-loader',
-  use: `css-loader?importLoader=2${minimize(env)}!postcss-loader?sourceMap=inline!stylus-loader`,
+  // use: `css-loader?importLoader=2${minimize(env)}!postcss-loader?sourceMap=inline!stylus-loader`,
+  use: [
+    `css-loader?importLoader=2${minimize(env)}`,
+    `postcss-loader?sourceMap=inline&config.path=./config.postcss.config.js`,
+    'stylus-loader',
+  ],
 });
 
 const options = {
