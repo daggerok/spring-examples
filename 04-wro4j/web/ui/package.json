@@ -15,7 +15,11 @@
     "start": "concurrently --kill-others 'npm-run-all -p webpack-dev-server open-url'",
     "lint": "eslint -c ./config/.eslintrc.js --ignore-pattern '**/*.spec.js' 'config/**/*.js' 'src/**/*.js'",
     "pretest": "npm run compile -- --env development",
-    "test": "karma start ./config/karma.conf.js #--log-level=debug"
+    "test": "karma start ./config/karma.conf.js #--log-level=debug",
+    "preserve": "yarn build",
+    "serve:livereload": "livereload | true",
+    "serve:serve": "serve -C -p 3000 -s ../src/main/resources/static",
+    "serve": "yarn -i; npm-run-all -p serve:*"
   },
   "dependencies": {
     "angular": "1.6.6",
