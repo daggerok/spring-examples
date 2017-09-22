@@ -17,6 +17,5 @@ some requirements (I just don't want fix webpack config again...)
 
 ```bash
 extract-text-webpack-plugin < 3
-postcss < 6
 webpack < 3
 ```
