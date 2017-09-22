@@ -1,6 +1,6 @@
 export default {
   presets: [
-    'es2015',
+    'env',
     'stage-0',
   ],
   plugins: [

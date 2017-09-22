@@ -32,7 +32,8 @@ const stylusLoader = env => ExtractTextWebpackPlugin.extract({
 const options = {
   presets: [
     // [ 'es2015', { modules: 'commonjs' } ], // can be false or amd, umd, systemjs, commonjs
-    ['es2015', { modules: false }],
+    // ['es2015', { modules: false }],
+    'env',
     'stage-0',
   ],
   plugins: [
