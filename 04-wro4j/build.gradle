@@ -42,4 +42,6 @@ subprojects {
       mavenBom "org.springframework.boot:spring-boot-starter-parent:$springBootVersion"
     }
   }
+
+  springBoot.executable = false
 }

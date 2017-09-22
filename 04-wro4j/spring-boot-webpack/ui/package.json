@@ -5,6 +5,7 @@
   "scripts": {
     "precompile": "rimraf -rf ../src/main/resources/static",
     "compile": "webpack --config=./config/webpack.config.babel.js",
+    "watch": "npm run compile -- -w",
     "webpack-dev-server": "webpack-dev-server -w -d --config=./config/webpack.config.babel.js --env development",
     "sleep": "sleep 3",
     "open": "open-url localhost:8000/",
