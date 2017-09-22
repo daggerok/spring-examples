@@ -521,13 +521,24 @@ table.CodeRay td.code>pre{padding:0}
 <div class="details">
 <span id="author" class="author">{author} &lt;daggerok@gmail.com&gt;</span><br>
 <span id="revnumber">version 0.0.1,</span>
-<span id="revdate">2017-09-22 05:52:18 EEST</span>
+<span id="revdate">2017-09-22 05:55:01 EEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#includes">1. Includes</a></li>
-<li><a href="#links">2. links</a></li>
+<li><a href="#spring-boot-under-the-hood">spring-boot under the hood</a>
+<ul class="sectlevel1">
+<li><a href="#build-and-run">1. build and run</a></li>
+<li><a href="#spring-boot-power">2. spring-boot POWER</a></li>
+<li><a href="#own-starters">3. own starters</a></li>
+</ul>
+</li>
+<li><a href="#server-side-events">Server Side Events</a>
+<ul class="sectlevel1">
+<li><a href="#links">1. links</a></li>
+</ul>
+</li>
 <li><a href="#enjoy">Enjoy! :)</a></li>
 </ul>
 </div>
@@ -566,26 +577,26 @@ table.CodeRay td.code>pre{padding:0}
 <div class="sect1">
 <h2 id="includes">1. Includes</h2>
 <div class="sectionbody">
-<div class="exampleblock">
-<div class="title">include::subprojects/01-spring-boot-under-the-hood.adoc[]</div>
-<div class="content">
-<div class="paragraph">
-<p>= spring-boot under the hood</p>
+
 </div>
+</div>
+<h1 id="spring-boot-under-the-hood" class="sect0">spring-boot under the hood</h1>
 <div class="paragraph">
 <p>This example is about spring-boot in general, not only 5th&#8230;&#8203;</p>
 </div>
-<div class="paragraph">
-<p>== build and run</p>
-</div>
+<div class="sect1">
+<h2 id="build-and-run">1. build and run</h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="bash">bash gradlew -t bootRun</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>== spring-boot POWER</p>
 </div>
+</div>
+<div class="sect1">
+<h2 id="spring-boot-power">2. spring-boot POWER</h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="title">out-of-the-box conditions</div>
 <div class="content">
@@ -627,9 +638,11 @@ table.CodeRay td.code>pre{padding:0}
 <span class="annotation">@NoneNestedConditions</span></code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>== own starters</p>
 </div>
+</div>
+<div class="sect1">
+<h2 id="own-starters">3. own starters</h2>
+<div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -662,12 +675,7 @@ In our case it&#8217;s kind of Java analog for JSON.stringify / JSON.parse from 
 </div>
 </div>
 </div>
-<div class="exampleblock">
-<div class="title">include::subprojects/02-sse-emitter.adoc[]</div>
-<div class="content">
-<div class="paragraph">
-<p>= Server Side Events</p>
-</div>
+<h1 id="server-side-events" class="sect0">Server Side Events</h1>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="bash">curl localhost:8080/subscriptions # terminal 1
@@ -689,12 +697,8 @@ http delete :8080/subscriptions/2017-09-22-01-18-22-693 # unsubscribe by id</cod
 </li>
 </ol>
 </div>
-</div>
-</div>
-</div>
-</div>
 <div class="sect1">
-<h2 id="links">2. links</h2>
+<h2 id="links">1. links</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -720,7 +724,7 @@ http delete :8080/subscriptions/2017-09-22-01-18-22-693 # unsubscribe by id</cod
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2017-09-22 05:52:18 EEST
+Last updated 2017-09-22 05:55:01 EEST
 </div>
 </div>
 </body>
