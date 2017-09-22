@@ -522,16 +522,13 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">Maksim Kostromin</span><br>
 <span id="email" class="email"><a href="mailto:daggerok@gmail.com">daggerok@gmail.com</a></span><br>
 <span id="revnumber">version 0.0.1,</span>
-<span id="revdate">2017-09-22 06:01:29 EEST</span>
+<span id="revdate">2017-09-22 06:03:50 EEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#includes">1. Includes</a></li>
-<li><a href="#build-and-run">2. build and run</a></li>
-<li><a href="#spring-boot-power">3. spring-boot POWER</a></li>
-<li><a href="#own-starters">4. own starters</a></li>
-<li><a href="#links">5. links</a></li>
+<li><a href="#links">2. links</a></li>
 <li><a href="#enjoy">Enjoy! :)</a></li>
 </ul>
 </div>
@@ -570,97 +567,8 @@ table.CodeRay td.code>pre{padding:0}
 <div class="sect1">
 <h2 id="includes">1. Includes</h2>
 <div class="sectionbody">
-
-</div>
-</div>
-<div class="sect1">
-<h2 id="build-and-run">2. build and run</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">bash gradlew -t bootRun</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="spring-boot-power">3. spring-boot POWER</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="title">out-of-the-box conditions</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// check if bean is in spring factory:</span>
-<span class="annotation">@OnBeanCondition</span>
-
-<span class="comment">// check if class is in classpath:</span>
-<span class="annotation">@OnClassCondition</span>
-
-<span class="comment">// on thruthy evaluated express condition:</span>
-<span class="annotation">@OnExpressionCondition</span>
-
-<span class="comment">// on expected java version</span>
-<span class="annotation">@OnJavaCondition</span>
-
-<span class="comment">// on expected JNDI branch</span>
-<span class="annotation">@OnJndiCondition</span>
-
-<span class="comment">// check if property exists</span>
-<span class="annotation">@OnPropertyCondition</span>
-
-<span class="comment">// check if resource exists</span>
-<span class="annotation">@OnResourceCondition</span>
-
-<span class="comment">// check if WebApplicationContext exists</span>
-<span class="annotation">@OnWebApplicationCondition</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">additional conditions for combine or merge them together</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// AND condition</span>
-<span class="annotation">@AllNestedConditions</span>
-
-<span class="comment">// OR condition</span>
-<span class="annotation">@AnyNestedConditions</span>
-
-<span class="comment">// NOT condition</span>
-<span class="annotation">@NoneNestedConditions</span></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="own-starters">4. own starters</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>create a starter configuration with provided by you custom functionality.
-In our case it&#8217;s kind of Java analog for JSON.stringify / JSON.parse from JS.</p>
-</li>
-<li>
-<p>create src/main/resources/META-INF/spring.factories file</p>
-</li>
-</ol>
-</div>
-<div class="listingblock">
-<div class="title">src/main/resources/META-INF/spring.factories</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="properties"></code></pre>
-</div>
-</div>
 <div class="paragraph">
-<p>TODO: finish readme&#8230;&#8203;</p>
-</div>
-<div class="paragraph">
-<p>links:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><a href="https://www.brighttalk.com/webcast/14893/252475">watch</a></p>
-</li>
-</ol>
+<p>Unresolved directive in index.adoc - include::../../subprojects/01-spring-boot-under-the-hood/README.adoc[tags=content01]</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -686,7 +594,7 @@ http delete :8080/subscriptions/2017-09-22-01-18-22-693 # unsubscribe by id</cod
 </div>
 </div>
 <div class="sect1">
-<h2 id="links">5. links</h2>
+<h2 id="links">2. links</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -712,7 +620,7 @@ http delete :8080/subscriptions/2017-09-22-01-18-22-693 # unsubscribe by id</cod
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2017-09-22 06:01:29 EEST
+Last updated 2017-09-22 06:03:50 EEST
 </div>
 </div>
 </body>
