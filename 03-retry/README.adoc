@@ -4,10 +4,42 @@
 
 === test
 
+.bootstrap app
 [source,bash]
 ----
-bash gradlew clean build
-# TDOD
+bash gradlew clean build bootRun
+----
+
+.sucess response response
+[source,bash]
+----
+http :8080                                                                                             09:32:02
+HTTP/1.1 200
+Content-Type: application/json;charset=UTF-8
+Date: Fri, 22 Sep 2017 06:32:04 GMT
+Transfer-Encoding: chunked
+
+{
+    "message": {
+        "attempts": 2,
+        "createdAt": "2017-09-22T06:32:04.074+0000"
+    }
+}
+----
+
+.bad response (recover strategy fallback response)
+[source,bash]
+----
+http :8080                                                                                            09:32:04
+HTTP/1.1 400
+Connection: close
+Content-Type: application/json;charset=UTF-8
+Date: Fri, 22 Sep 2017 06:32:06 GMT
+Transfer-Encoding: chunked
+
+{
+    "error": "fuck..."
+}
 ----
 
 //end::content[]

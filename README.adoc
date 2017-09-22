@@ -4,3 +4,4 @@ This repository is contains some spring / spring-boot playground projects
 
 . link:01-spring-boot-under-the-hood/[Spring boot conditions, auto-configurations and custom starter]
 . link:02-sse-emitter/[Server-side events / SSE emitter]
+. link:03-retry/[Retry mechanism]
