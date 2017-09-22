@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.5">
 <meta name="author" content="Maksim Kostromin">
-<title>spring-examples docs (0.0.3)</title>
+<title>spring-examples docs (0.4.1)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -531,11 +531,11 @@ table.CodeRay td.code>pre{padding:0}
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>spring-examples docs (0.0.3) <span class="image"><a class="image" href="https://github.com/daggerok/spring-examples"><img src="https://travis-ci.org/daggerok/spring-examples.svg?branch=master" alt="Build Status"></a></span></h1>
+<h1>spring-examples docs (0.4.1) <span class="image"><a class="image" href="https://github.com/daggerok/spring-examples"><img src="https://travis-ci.org/daggerok/spring-examples.svg?branch=master" alt="Build Status"></a></span></h1>
 <div class="details">
 <span id="author" class="author">Maksim Kostromin</span><br>
 <span id="email" class="email"><a href="mailto:daggerok@gmail.com">daggerok@gmail.com</a></span><br>
-<span id="revnumber">version 0.0.3,</span>
+<span id="revnumber">version 0.4.1,</span>
 <span id="revdate">2017-09-22 17:48:53 EEST</span>
 </div>
 <div id="toc" class="toc2">
@@ -583,7 +583,7 @@ table.CodeRay td.code>pre{padding:0}
 <p>sounrces: ../../..</p>
 </li>
 <li>
-<p>project-version: 0.0.3</p>
+<p>project-version: 0.4.1</p>
 </li>
 <li>
 <p>github_url: <a href="https://github.com/daggerok/spring-examples" class="bare">https://github.com/daggerok/spring-examples</a></p>
@@ -774,13 +774,27 @@ Transfer-Encoding: chunked
 <div class="listingblock">
 <div class="title">bootstrap app</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">bash gradlew clean build bootRun</code></pre>
+<pre class="CodeRay highlight"><code data-lang="bash">bash gradlew build
+bash spring-boot-webpack/build/libs/spring-boot-webpack-0.0.1.jar --server.port=8000
+bash spring-boot-wro4j/build/libs/spring-boot-wro4j-0.0.1.jar --server.port=8000</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">develoment</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">bash gradlew build
+
+bash gradlew s-b-webpack:bRun
+bash gradlew s-b-webpack:ui:yarn_watch
+
+bash gradlew s-b-wro:bRun
+bash gradles s-b-wro:processWebResources -t</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">sucess response response</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">http :8080                                                                                             09:32:02</code></pre>
+<pre class="CodeRay highlight"><code data-lang="bash">http :8080</code></pre>
 </div>
 </div>
 </div>
@@ -807,7 +821,7 @@ Transfer-Encoding: chunked
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.0.3<br>
+Version 0.4.1<br>
 Last updated 2017-09-22 17:48:53 EEST
 </div>
 </div>
