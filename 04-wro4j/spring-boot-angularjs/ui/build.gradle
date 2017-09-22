@@ -23,26 +23,14 @@ node {
   npmVersion = "5.0.3"
   yarnVersion = "0.24.5"
 }
-/*
-node {
-  // LTS
-  version = "6.9.2"
-  npmVersion = "3.10.9"
-  // // https://github.com/srs/gradle-node-plugin/issues/171
-  // download = true
-}
-*/
 
 assemble.dependsOn yarn_build
 yarn_build.dependsOn yarn_install
 yarn_install.dependsOn yarn_cache_clean
 
-
 test {
   dependsOn yarn_test, yarn_lint
 }
-
-//clean.dependsOn yarn_rimraf
 
 ///*
 clean.doFirst {

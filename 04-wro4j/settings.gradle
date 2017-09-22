@@ -1,2 +1,2 @@
-include ":web"
-include ":web:ui"
+include ":spring-boot-angularjs"
+include ":spring-boot-angularjs:ui"
