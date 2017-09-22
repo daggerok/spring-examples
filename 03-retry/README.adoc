@@ -1,0 +1,13 @@
+= Retry
+
+//tag::content[]
+
+=== test
+
+[source,bash]
+----
+bash gradlew clean build
+# TDOD
+----
+
+//end::content[]

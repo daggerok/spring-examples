@@ -1,6 +1,6 @@
 = Server Side Events
 
-//tag::content02[]
+//tag::content[]
 
 === test
 

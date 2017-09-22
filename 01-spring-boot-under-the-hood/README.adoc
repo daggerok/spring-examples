@@ -2,7 +2,7 @@
 
 This example is about spring-boot in general, not only 5th...
 
-//tag::content01[]
+//tag::content[]
 
 === build and run
 
@@ -73,4 +73,4 @@ TODO: finish readme...
 
 . link:https://www.brighttalk.com/webcast/14893/252475[watch]
 
-//end::content01[]
+//end::content[]

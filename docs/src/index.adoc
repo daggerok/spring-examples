@@ -16,10 +16,13 @@ ifndef::sourcedir[:sourcedir: ../../..]
 include::includes/Introduction.adoc[]
 
 == spring-boot under the hood
-include::../../01-spring-boot-under-the-hood/README.adoc[tags=content01]
+include::../../01-spring-boot-under-the-hood/README.adoc[tags=content]
 
 == server-side events / sse emitter
-include::../../02-sse-emitter/README.adoc[tags=content02]
+include::../../02-sse-emitter/README.adoc[tags=content]
+
+== retry
+include::../../03-retry/README.adoc[tags=content]
 
 == links
 include::includes/Links.adoc[]
