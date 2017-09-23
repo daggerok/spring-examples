@@ -839,7 +839,30 @@ bash gradles s-b-g-j-c-p:webResources -t</code></pre>
 <div class="sect2">
 <h3 id="mokito">5.1. mokito</h3>
 <div class="paragraph">
-<p>Unresolved directive in g/README.adoc - include::mokito/src/main/test/java/daggerok/mokito/MokitoTest.java[tags=content]</p>
+<p>@RunWith(MockitoJUnitRunner.class) // 1
+public class MokitoTest {</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@Mock // 2
+RandomService randomService;</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@InjectMocks // 3
+UnstableResource sut;</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>  @Test
+  public void testMock() throws Exception {
+    val res = sut.unstable(); // 3
+    log.warn("res: {}", res.getBody());
+  }
+}</pre>
+</div>
 </div>
 <div class="listingblock">
 <div class="title">mokito testing</div>
