@@ -1,0 +1,25 @@
+= Testing
+
+//tag::content[]
+
+.testing
+[source,bash]
+----
+bash gradlew clean test
+----
+
+=== mokito
+
+.simple mokito
+[source,java]
+----
+include::mokito/src/test/java/daggerok/mokito/MokitoTest.java[tags=content]
+----
+
+.mokito testing
+[source,bash]
+----
+bash gradlew clean m:test
+----
+
+//end::content[]
