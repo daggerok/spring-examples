@@ -841,21 +841,17 @@ bash gradles s-b-g-j-c-p:webResources -t</code></pre>
 <div class="listingblock">
 <div class="title">simple mokito</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// 1</span>
-<span class="annotation">@RunWith</span>(MockitoJUnitRunner.class)
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@RunWith</span>(MockitoJUnitRunner.class)          <span class="comment">/* 1 */</span>
 <span class="directive">public</span> <span class="type">class</span> <span class="class">MokitoTest</span> {
 
-  <span class="comment">// 2</span>
-  <span class="annotation">@Mock</span> RandomService randomService;
+  <span class="annotation">@Mock</span> RandomService randomService;        <span class="comment">/* 2 */</span>
 
-  <span class="comment">// 3</span>
   <span class="annotation">@InjectMocks</span>
-  UnstableResource sut;
+  UnstableResource sut;                     <span class="comment">/* 3 */</span>
 
   <span class="annotation">@Test</span>
   <span class="directive">public</span> <span class="type">void</span> testMock() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="comment">// 3</span>
-    val res = sut.unstable();
+    val res = sut.unstable();               <span class="comment">/* 4 */</span>
     assertThat(res, notNullValue());
   }
 }</code></pre>
