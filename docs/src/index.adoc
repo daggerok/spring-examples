@@ -24,8 +24,8 @@ include::../../02-sse-emitter/README.adoc[tags=content]
 == retry
 include::../../03-retry/README.adoc[tags=content]
 
-== wro4j
-include::../../04-wro4j/README.adoc[tags=content]
+== frontend web resources optimization
+include::../../04-frontend-reources/README.adoc[tags=content]
 
 == links
 include::includes/Links.adoc[]

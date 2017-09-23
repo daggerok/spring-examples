@@ -1,0 +1,118 @@
+plugins {
+  id "com.eriwen.gradle.js" version "2.14.1"
+  id "com.eriwen.gradle.css" version "2.14.0"
+}
+
+repositories {
+  mavenCentral()
+  jcenter()
+}
+
+dependencies {
+  compile "org.springframework.boot:spring-boot-starter-mustache"
+  compile "org.webjars:webjars-locator:0.32-1"
+  compile "org.webjars.npm:jquery:3.2.1"
+  compile "org.webjars.npm:tether:1.4.0"
+  compile "org.webjars.npm:bootstrap:4.0.0-alpha.6"
+  compile "org.webjars.npm:bootswatch:4.0.0-alpha.6"
+  compile "org.webjars.npm:angular:1.6.5"
+  compile "org.webjars.npm:types__angular:1.6.25"
+}
+
+/**
+ * css
+ */
+
+css.source {
+  dev {
+    css {
+      srcDir "src/main/ui"
+      include "*.css"
+      exclude "*.min.css"
+    }
+  }
+  prod {
+    css {
+      srcDir "src/main/ui"
+      include "*.min.css"
+    }
+  }
+}
+
+csslint {
+  source = css.source.dev.css.files
+  dest = "${buildDir}/ui/lint/css.out"
+}
+
+combineCss {
+  source = css.source.dev.css.files
+  dest = "$buildDir/ui/app.css"
+}
+
+minifyCss {
+  source = combineCss
+  dest = "$buildDir/resources/main/static/app.css"
+  // Optional
+  yuicompressor {
+    lineBreakPos = -1
+  }
+}
+
+gzipCss {
+  source = minifyCss
+  dest = "$buildDir/resources/main/static/app.css.gz"
+}
+
+/**
+ * js
+ */
+
+javascript.source {
+  dev {
+    js {
+      srcDir "src/main/ui"
+      include "**/*.js"
+      exclude "**/*.min.js"
+    }
+  }
+  prod {
+    js {
+      "src/main/ui"
+      include "**/*.min.js"
+    }
+  }
+}
+
+combineJs {
+  encoding = "UTF-8"
+  source = javascript.source.dev.js.files
+  dest = "$buildDir/ui/app.js"
+}
+
+minifyJs {
+  source = combineJs
+  dest = "$buildDir/resources/main/static/app.js"
+  // Optional
+  sourceMap = file("$buildDir/resources/main/static/app.js.map")
+  closure {
+    warningLevel = 'QUIET'
+    compilationLevel = 'WHITESPACE_ONLY'
+    compilerOptions = [
+        languageIn: 'ECMASCRIPT6_STRICT',
+        languageOut: 'ECMASCRIPT5'
+    ]
+  }
+}
+
+gzipJs {
+  source = minifyJs.dest
+  dest = "$buildDir/resources/main/static/app.js.gz"
+}
+
+task devResources(dependsOn: [combineCss, combineJs])
+task webResources(dependsOn: [minifyCss, gzipCss, minifyJs, gzipJs])
+
+devResources.shouldRunAfter clean
+webResources.shouldRunAfter clean, devResources
+
+assemble.dependsOn webResources

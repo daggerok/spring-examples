@@ -1,8 +1,2 @@
-This documentation contains some help to link:github.com/daggerok/spring-examples[examples from spring-examples repository] is contains some spring / spring-boot playground projects
-
-. sounrces: {sourcedir}
-. project-version: {project-version}
-. github_url: {github_url}
-. github_project_path: {github_project_path}
-. github_fork_badge: {github_fork_badge}
-. last-update-label: {last-update-label} {date}
+This documentation contains some help to
+link:{github_url}[examples from spring-examples repository] is contains some spring / spring-boot playground projects

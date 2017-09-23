@@ -1,0 +1,50 @@
+= Frontend Web resources optimization
+
+//tag::content[]
+
+We can optimize resources in many different way.
+Here are 3:
+
+. using link:spring-boot-webpack/[Gradle plugin for NodeJS] with common frontend npm flow
+. using link:spring-boot-wro4j/[Wro4j Gradle Plugin]
+. using link:spring-boot-gradle-js-css-plugin/[Gradle JS/CSS Plugins]
+
+=== test
+
+.bootstrap app
+[source,bash]
+----
+bash gradlew build
+bash spring-boot-webpack/build/libs/spring-boot-webpack-0.0.1.jar --server.port=8000
+bash spring-boot-wro4j/build/libs/spring-boot-wro4j-0.0.1.jar --server.port=8000
+----
+
+.develoment
+[source,bash]
+----
+bash gradlew build
+
+bash gradlew s-b-webpack:bRun
+bash gradlew s-b-webpack:ui:yarn_watch
+
+bash gradlew s-b-wro:bRun
+bash gradles s-b-wro:processWebResources -t
+
+bash gradlew s-b-g-j-c-p:bRun
+bash gradles s-b-g-j-c-p:webResources -t
+----
+
+.sucess response response
+[source,bash]
+----
+http :8080
+----
+
+links:
+
+. link:https://github.com/srs/gradle-node-plugin[Gradle Plugin for Node]
+. link:https://github.com/IlyaAI/wro4j-gradle-plugin[Wro4J Gradle Plugin]
+. link:https://github.com/eriwen/gradle-css-plugin[Gradle CSS Plugin]
+. link:https://github.com/eriwen/gradle-js-plugin[Gradle Javascript Plugin]
+
+//end::content[]
