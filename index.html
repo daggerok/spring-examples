@@ -838,30 +838,24 @@ bash gradles s-b-g-j-c-p:webResources -t</code></pre>
 </div>
 <div class="sect2">
 <h3 id="mokito">5.1. mokito</h3>
-<div class="paragraph">
-<p>@RunWith(MockitoJUnitRunner.class) // 1
-public class MokitoTest {</p>
-</div>
-<div class="literalblock">
+<div class="listingblock">
+<div class="title">simple mokito</div>
 <div class="content">
-<pre>@Mock // 2
-RandomService randomService;</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>@InjectMocks // 3
-UnstableResource sut;</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>  @Test
-  public void testMock() throws Exception {
-    val res = sut.unstable(); // 3
-    log.warn("res: {}", res.getBody());
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@RunWith</span>(MockitoJUnitRunner.class) <span class="comment">// 1</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">MokitoTest</span> {
+
+  <span class="annotation">@Mock</span> <span class="comment">// 2</span>
+  RandomService randomService;
+
+  <span class="annotation">@InjectMocks</span> <span class="comment">// 3</span>
+  UnstableResource sut;
+
+  <span class="annotation">@Test</span>
+  <span class="directive">public</span> <span class="type">void</span> testMock() <span class="directive">throws</span> <span class="exception">Exception</span> {
+    val res = sut.unstable(); <span class="comment">// 3</span>
+    log.warn(<span class="string"><span class="delimiter">&quot;</span><span class="content">res: {}</span><span class="delimiter">&quot;</span></span>, res.getBody());
   }
-}</pre>
+}</code></pre>
 </div>
 </div>
 <div class="listingblock">
