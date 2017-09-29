@@ -33,6 +33,7 @@ script:
   - export ROOT=$PWD
   - >
     for path in \
+      06-cqrs-and-eventsourcing \
       04-wro4j \
       03-retry \
       02-sse-emitter \

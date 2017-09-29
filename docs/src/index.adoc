@@ -30,6 +30,9 @@ include::../../04-frontend-reources/README.adoc[tags=content]
 == testing
 include::../../05-testing/README.adoc[tags=content]
 
+== CQRS and Event-Sourcing
+include::../../06-cqrs-and-eventsourcing/README.adoc[tags=content]
+
 == links
 include::includes/Links.adoc[]
 

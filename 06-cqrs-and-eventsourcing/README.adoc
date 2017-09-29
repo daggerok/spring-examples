@@ -1,0 +1,16 @@
+= CQRS and Event Sourcing image:https://travis-ci.org/daggerok/spring-examples.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/spring-examples"]
+
+//tag::content[]
+
+=== test
+
+[source,bash]
+----
+bash gradlew bootRun
+----
+
+=== links
+
+. link:https://www.youtube.com/watch?v=bVnjI0XOA9w[An Architecture with CQRS and Event Sourcing by Eugen Paraschiv]
+
+//end::content02[]
