@@ -102,16 +102,16 @@ public class MessageService {
 
   static Event connectMessage(final String subscriptionId) {
     return new Event().setId(subscriptionId)
-                      .setType(CONNECT);
+                      .setType(Type.CONNECT);
   }
 
   static Event disconnectMessage(final String subscriptionId) {
     return new Event().setId(subscriptionId)
-                      .setType(DISCONNECT);
+                      .setType(Type.DISCONNECT);
   }
 
   static Event timeoutMessage(final String subscriptionId) {
     return new Event().setId(subscriptionId)
-                      .setType(TIMEOUT);
+                      .setType(Type.TIMEOUT);
   }
 }

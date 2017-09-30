@@ -1,3 +1,6 @@
 dependencies {
-  compile('org.springframework.retry:spring-retry')
+  compile("org.springframework.boot:spring-boot-starter-mustache")
+  compile("org.webjars.npm:eventsource:0.1.6")
+  compile("org.webjars:EventSource:0.0.9")
+  compile("org.webjars.npm:types__whatwg-fetch:0.0.33")
 }

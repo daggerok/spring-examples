@@ -4,6 +4,9 @@
 
 === test
 
+open 2 browser windows and start chatting
+
+.or use console
 [source,bash]
 ----
 curl localhost:8080/subscriptions # terminal 1
@@ -16,5 +19,6 @@ http delete :8080/subscriptions/2017-09-22-01-18-22-693 # unsubscribe by id
 
 . link:https://golb.hplar.ch/p/Server-Sent-Events-with-Spring[Link]
 . link:https://infinitescript.com/2015/06/use-server-sent-event-in-spring-4-2/[Other link]
+. link:https://html.spec.whatwg.org/multipage/server-sent-events.html#the-eventsource-interface[Server-sent events]
 
 //end::content02[]

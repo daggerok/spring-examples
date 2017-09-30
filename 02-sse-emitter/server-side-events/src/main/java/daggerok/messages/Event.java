@@ -10,7 +10,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 
-import static daggerok.messages.Type.MESSAGE;
 import static java.time.ZonedDateTime.now;
 import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME;
 
@@ -28,6 +27,6 @@ public final class Event implements Serializable {
 
   @DateTimeFormat(iso = DATE_TIME)
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
-  Type type = MESSAGE;
+  Type type = Type.MESSAGE;
   final String createdAt = now().format(FORMAT);
 }
