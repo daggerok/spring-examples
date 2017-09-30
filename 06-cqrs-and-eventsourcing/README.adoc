@@ -4,13 +4,175 @@
 
 === test
 
+.bootstrap
 [source,bash]
 ----
 bash gradlew bootRun
 ----
 
+.get initial
+[source,bash]
+----
+http :8080/api/v1/order/items
+[
+    {
+        "createdAt": "2017-09-30 09:08:23.160 +0000",
+        "id": "cddca9831a0",
+        "localDateTime": "2017-09-30 12:08:23.160 Z",
+        "name": "two",
+        "price": 4.82
+    },
+    {
+        "createdAt": "2017-09-30 09:08:23.044 +0000",
+        "id": "ef37433ecb6",
+        "localDateTime": "2017-09-30 12:08:23.046 Z",
+        "name": "one",
+        "price": 4.21
+    },
+    {
+        "createdAt": "2017-09-30 09:08:23.275 +0000",
+        "id": "a6ad2f9fa48",
+        "localDateTime": "2017-09-30 12:08:23.275 Z",
+        "name": "three",
+        "price": 6.4
+    }
+]
+----
+
+.shopping
+[source,bash]
+----
+curl localhost:8080/api/v1/add-to-card -d'{"itemIds":["a6ad2f9fa48"]}' -H'content-type:application/json'
+a6d3c929e35
+
+## logs:
+# 2017-09-30 12:09:00.952 : create: CreateOrderEvent(transactionId=a6d3c929e35, itemIds=[a6ad2f9fa48], createdAt=2017-09-30T12:09:00.950)
+# 2017-09-30 12:09:00.955 : add: AddToCardEvent(transactionId=a6d3c929e35, itemId=a6ad2f9fa48, createdAt=2017-09-30T12:09:00.954)
+# 2017-09-30 12:09:00.956 : store AddToCardEvent(transactionId=a6d3c929e35, itemId=a6ad2f9fa48, createdAt=2017-09-30T12:09:00.954)
+# 2017-09-30 12:09:00.956 : store CreateOrderEvent(transactionId=a6d3c929e35, itemIds=[a6ad2f9fa48], createdAt=2017-09-30T12:09:00.950)
+
+http post :8080/api/v1/add-to-card/a6d3c929e35 itemIds:='["ef37433ecb6"]'
+a6d3c929e35
+
+## logs:
+# 2017-09-30 12:10:28.083 : create: CreateOrderEvent(transactionId=a6d3c929e35, itemIds=[ef37433ecb6], createdAt=2017-09-30T12:10:28.083)
+# 2017-09-30 12:10:28.083 : add: AddToCardEvent(transactionId=a6d3c929e35, itemId=ef37433ecb6, createdAt=2017-09-30T12:10:28.083)
+# 2017-09-30 12:10:28.083 : store AddToCardEvent(transactionId=a6d3c929e35, itemId=ef37433ecb6, createdAt=2017-09-30T12:10:28.083)
+# 2017-09-30 12:10:28.083 : store CreateOrderEvent(transactionId=a6d3c929e35, itemIds=[ef37433ecb6], createdAt=2017-09-30T12:10:28.083)
+----
+
+.verify order
+[source,bash]
+----
+curl localhost:8080/api/v1/order/a6d3c929e35 | jq
+{
+  "id": "a6d3c929e35",
+  "itemIds": [
+    "a6ad2f9fa48",
+    "ef37433ecb6"
+  ],
+  "done": false,
+  "createdAt": "2017-09-30 09:09:00.955 +0000",
+  "localDateTime": "2017-09-30 12:09:00.955 Z"
+}
+----
+
+.publish order
+[source,bash]
+----
+http post :8080/api/v1/order/a6d3c929e35
+
+## logs:
+# 2017-09-30 12:11:20.081 : ship: ShipOrderEvent(transactionId=a6d3c929e35, createdAt=2017-09-30T12:11:20.081)
+# 2017-09-30 12:11:20.083 : publish: ShopItem(id=a6ad2f9fa48, name=three, price=6.40, createdAt=2017-09-30T12:08:23.275+03:00[Europe/Kiev], localDateTime=2017-09-30T12:08:23.275)
+# 2017-09-30 12:11:20.083 : publish: ShopItem(id=ef37433ecb6, name=one, price=4.21, createdAt=2017-09-30T12:08:23.044+03:00[Europe/Kiev], localDateTime=2017-09-30T12:08:23.046)
+# 2017-09-30 12:11:20.083 : publish: ShipOrderEvent(transactionId=a6d3c929e35, createdAt=2017-09-30T12:11:20.081)
+# 2017-09-30 12:11:20.083 : delivery: DeliveryOrderEvent(transactionId=a6d3c929e35, createdAt=2017-09-30T12:11:20.083)
+# 2017-09-30 12:11:20.084 : store DeliveryOrderEvent(transactionId=a6d3c929e35, createdAt=2017-09-30T12:11:20.083)
+# 2017-09-30 12:11:20.084 : store ShipOrderEvent(transactionId=a6d3c929e35, createdAt=2017-09-30T12:11:20.081)
+----
+
+.verify order is completed (done)
+[source,bash]
+----
+curl localhost:8080/api/v1/order/a6d3c929e35 | jq
+{
+  "id": "a6d3c929e35",
+  "itemIds": [
+    "a6ad2f9fa48",
+    "ef37433ecb6"
+  ],
+  "done": true,
+  "createdAt": "2017-09-30 09:09:00.955 +0000",
+  "localDateTime": "2017-09-30 12:09:00.955 Z"
+}
+----
+
+.check which goods are available
+[source,bash]
+----
+http :8080/api/v1/order/items
+[
+    {
+        "createdAt": "2017-09-30 09:08:23.160 +0000",
+        "id": "cddca9831a0",
+        "localDateTime": "2017-09-30 12:08:23.160 Z",
+        "name": "two",
+        "price": 4.82
+    }
+]
+----
+
+
+.eventstore
+[source,bash]
+----
+http :8080/api/v1/events
+[
+    {
+        "createdAt": "2017093012090095043740950000000",
+        "itemIds": [
+            "a6ad2f9fa48"
+        ],
+        "transactionId": "a6d3c929e35",
+        "type": "CreateOrderEvent"
+    },
+    {
+        "createdAt": "2017093012090095443740954000000",
+        "itemId": "a6ad2f9fa48",
+        "transactionId": "a6d3c929e35",
+        "type": "AddToCardEvent"
+    },
+    {
+        "createdAt": "2017093012102808343828083000000",
+        "itemId": "ef37433ecb6",
+        "transactionId": "a6d3c929e35",
+        "type": "AddToCardEvent"
+    },
+    {
+        "createdAt": "2017093012102808343828083000000",
+        "itemIds": [
+            "ef37433ecb6"
+        ],
+        "transactionId": "a6d3c929e35",
+        "type": "CreateOrderEvent"
+    },
+    {
+        "createdAt": "2017093012112008143880081000000",
+        "transactionId": "a6d3c929e35",
+        "type": "ShipOrderEvent"
+    },
+    {
+        "createdAt": "2017093012112008343880083000000",
+        "transactionId": "a6d3c929e35",
+        "type": "DeliveryOrderEvent"
+    }
+]
+----
+
 === links
 
+. link:https://www.youtube.com/watch?v=iK8x1mUPwCE[When, Why, and How to CQRS]
 . link:https://www.youtube.com/watch?v=bVnjI0XOA9w[An Architecture with CQRS and Event Sourcing by Eugen Paraschiv]
 
 //end::content02[]

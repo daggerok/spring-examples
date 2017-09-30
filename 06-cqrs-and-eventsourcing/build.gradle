@@ -25,6 +25,11 @@ allprojects {
   repositories {
     mavenCentral()
   }
+
+  wrapper {
+    gradleVersion = "4.2"
+    distributionType = "ALL"
+  }
 }
 
 subprojects {
@@ -36,12 +41,8 @@ subprojects {
     compileOnly("org.projectlombok:lombok")
     compile("io.vavr:vavr:0.9.1")
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
     runtime("org.springframework.boot:spring-boot-devtools")
     testCompile("org.springframework.boot:spring-boot-starter-test")
   }
-}
-
-wrapper {
-  gradleVersion = "4.2"
-  distributionType = "ALL"
 }
