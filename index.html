@@ -540,7 +540,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">Maksim Kostromin</span><br>
 <span id="email" class="email"><a href="mailto:daggerok@gmail.com">daggerok@gmail.com</a></span><br>
 <span id="revnumber">version 0.4.1,</span>
-<span id="revdate">2017-09-23 04:19:13 EEST</span>
+<span id="revdate">2017-09-30 02:07:56 EEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -574,8 +574,14 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#mokito">5.1. mokito</a></li>
 </ul>
 </li>
-<li><a href="#links-3">6. links</a></li>
-<li><a href="#enjoy">7. Enjoy! :)</a></li>
+<li><a href="#cqrs-and-event-sourcing">6. CQRS and Event-Sourcing</a>
+<ul class="sectlevel2">
+<li><a href="#test-4">6.1. test</a></li>
+<li><a href="#links-3">6.2. links</a></li>
+</ul>
+</li>
+<li><a href="#links-4">7. links</a></li>
+<li><a href="#enjoy">8. Enjoy! :)</a></li>
 </ul>
 </div>
 </div>
@@ -830,6 +836,9 @@ bash gradles s-b-g-j-c-p:webResources -t</code></pre>
 <div class="sect1">
 <h2 id="testing">5. testing</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>TODO: In progress&#8230;&#8203;</p>
+</div>
 <div class="listingblock">
 <div class="title">testing</div>
 <div class="content">
@@ -868,7 +877,190 @@ bash gradles s-b-g-j-c-p:webResources -t</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="links-3">6. links</h2>
+<h2 id="cqrs-and-event-sourcing">6. CQRS and Event-Sourcing</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="test-4">6.1. test</h3>
+<div class="listingblock">
+<div class="title">bootstrap</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">bash gradlew bootRun</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">get initial</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">http :8080/api/v1/order/items
+[
+    {
+        &quot;createdAt&quot;: &quot;2017-09-30 09:08:23.160 +0000&quot;,
+        &quot;id&quot;: &quot;cddca9831a0&quot;,
+        &quot;localDateTime&quot;: &quot;2017-09-30 12:08:23.160 Z&quot;,
+        &quot;name&quot;: &quot;two&quot;,
+        &quot;price&quot;: 4.82
+    },
+    {
+        &quot;createdAt&quot;: &quot;2017-09-30 09:08:23.044 +0000&quot;,
+        &quot;id&quot;: &quot;ef37433ecb6&quot;,
+        &quot;localDateTime&quot;: &quot;2017-09-30 12:08:23.046 Z&quot;,
+        &quot;name&quot;: &quot;one&quot;,
+        &quot;price&quot;: 4.21
+    },
+    {
+        &quot;createdAt&quot;: &quot;2017-09-30 09:08:23.275 +0000&quot;,
+        &quot;id&quot;: &quot;a6ad2f9fa48&quot;,
+        &quot;localDateTime&quot;: &quot;2017-09-30 12:08:23.275 Z&quot;,
+        &quot;name&quot;: &quot;three&quot;,
+        &quot;price&quot;: 6.4
+    }
+]</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">shopping</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">curl localhost:8080/api/v1/add-to-card -d'{&quot;itemIds&quot;:[&quot;a6ad2f9fa48&quot;]}' -H'content-type:application/json'
+a6d3c929e35
+
+## logs:
+# 2017-09-30 12:09:00.952 : create: CreateOrderEvent(transactionId=a6d3c929e35, itemIds=[a6ad2f9fa48], createdAt=2017-09-30T12:09:00.950)
+# 2017-09-30 12:09:00.955 : add: AddToCardEvent(transactionId=a6d3c929e35, itemId=a6ad2f9fa48, createdAt=2017-09-30T12:09:00.954)
+# 2017-09-30 12:09:00.956 : store AddToCardEvent(transactionId=a6d3c929e35, itemId=a6ad2f9fa48, createdAt=2017-09-30T12:09:00.954)
+# 2017-09-30 12:09:00.956 : store CreateOrderEvent(transactionId=a6d3c929e35, itemIds=[a6ad2f9fa48], createdAt=2017-09-30T12:09:00.950)
+
+http post :8080/api/v1/add-to-card/a6d3c929e35 itemIds:='[&quot;ef37433ecb6&quot;]'
+a6d3c929e35
+
+## logs:
+# 2017-09-30 12:10:28.083 : create: CreateOrderEvent(transactionId=a6d3c929e35, itemIds=[ef37433ecb6], createdAt=2017-09-30T12:10:28.083)
+# 2017-09-30 12:10:28.083 : add: AddToCardEvent(transactionId=a6d3c929e35, itemId=ef37433ecb6, createdAt=2017-09-30T12:10:28.083)
+# 2017-09-30 12:10:28.083 : store AddToCardEvent(transactionId=a6d3c929e35, itemId=ef37433ecb6, createdAt=2017-09-30T12:10:28.083)
+# 2017-09-30 12:10:28.083 : store CreateOrderEvent(transactionId=a6d3c929e35, itemIds=[ef37433ecb6], createdAt=2017-09-30T12:10:28.083)</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">verify order</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">curl localhost:8080/api/v1/order/a6d3c929e35 | jq
+{
+  &quot;id&quot;: &quot;a6d3c929e35&quot;,
+  &quot;itemIds&quot;: [
+    &quot;a6ad2f9fa48&quot;,
+    &quot;ef37433ecb6&quot;
+  ],
+  &quot;done&quot;: false,
+  &quot;createdAt&quot;: &quot;2017-09-30 09:09:00.955 +0000&quot;,
+  &quot;localDateTime&quot;: &quot;2017-09-30 12:09:00.955 Z&quot;
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">publish order</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">http post :8080/api/v1/order/a6d3c929e35
+
+## logs:
+# 2017-09-30 12:11:20.081 : ship: ShipOrderEvent(transactionId=a6d3c929e35, createdAt=2017-09-30T12:11:20.081)
+# 2017-09-30 12:11:20.083 : publish: ShopItem(id=a6ad2f9fa48, name=three, price=6.40, createdAt=2017-09-30T12:08:23.275+03:00[Europe/Kiev], localDateTime=2017-09-30T12:08:23.275)
+# 2017-09-30 12:11:20.083 : publish: ShopItem(id=ef37433ecb6, name=one, price=4.21, createdAt=2017-09-30T12:08:23.044+03:00[Europe/Kiev], localDateTime=2017-09-30T12:08:23.046)
+# 2017-09-30 12:11:20.083 : publish: ShipOrderEvent(transactionId=a6d3c929e35, createdAt=2017-09-30T12:11:20.081)
+# 2017-09-30 12:11:20.083 : delivery: DeliveryOrderEvent(transactionId=a6d3c929e35, createdAt=2017-09-30T12:11:20.083)
+# 2017-09-30 12:11:20.084 : store DeliveryOrderEvent(transactionId=a6d3c929e35, createdAt=2017-09-30T12:11:20.083)
+# 2017-09-30 12:11:20.084 : store ShipOrderEvent(transactionId=a6d3c929e35, createdAt=2017-09-30T12:11:20.081)</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">verify order is completed (done)</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">curl localhost:8080/api/v1/order/a6d3c929e35 | jq
+{
+  &quot;id&quot;: &quot;a6d3c929e35&quot;,
+  &quot;itemIds&quot;: [
+    &quot;a6ad2f9fa48&quot;,
+    &quot;ef37433ecb6&quot;
+  ],
+  &quot;done&quot;: true,
+  &quot;createdAt&quot;: &quot;2017-09-30 09:09:00.955 +0000&quot;,
+  &quot;localDateTime&quot;: &quot;2017-09-30 12:09:00.955 Z&quot;
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">check which goods are available</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">http :8080/api/v1/order/items
+[
+    {
+        &quot;createdAt&quot;: &quot;2017-09-30 09:08:23.160 +0000&quot;,
+        &quot;id&quot;: &quot;cddca9831a0&quot;,
+        &quot;localDateTime&quot;: &quot;2017-09-30 12:08:23.160 Z&quot;,
+        &quot;name&quot;: &quot;two&quot;,
+        &quot;price&quot;: 4.82
+    }
+]</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">eventstore</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">http :8080/api/v1/events
+[
+    {
+        &quot;createdAt&quot;: &quot;2017093012090095043740950000000&quot;,
+        &quot;itemIds&quot;: [
+            &quot;a6ad2f9fa48&quot;
+        ],
+        &quot;transactionId&quot;: &quot;a6d3c929e35&quot;,
+        &quot;type&quot;: &quot;CreateOrderEvent&quot;
+    },
+    {
+        &quot;createdAt&quot;: &quot;2017093012090095443740954000000&quot;,
+        &quot;itemId&quot;: &quot;a6ad2f9fa48&quot;,
+        &quot;transactionId&quot;: &quot;a6d3c929e35&quot;,
+        &quot;type&quot;: &quot;AddToCardEvent&quot;
+    },
+    {
+        &quot;createdAt&quot;: &quot;2017093012102808343828083000000&quot;,
+        &quot;itemId&quot;: &quot;ef37433ecb6&quot;,
+        &quot;transactionId&quot;: &quot;a6d3c929e35&quot;,
+        &quot;type&quot;: &quot;AddToCardEvent&quot;
+    },
+    {
+        &quot;createdAt&quot;: &quot;2017093012102808343828083000000&quot;,
+        &quot;itemIds&quot;: [
+            &quot;ef37433ecb6&quot;
+        ],
+        &quot;transactionId&quot;: &quot;a6d3c929e35&quot;,
+        &quot;type&quot;: &quot;CreateOrderEvent&quot;
+    },
+    {
+        &quot;createdAt&quot;: &quot;2017093012112008143880081000000&quot;,
+        &quot;transactionId&quot;: &quot;a6d3c929e35&quot;,
+        &quot;type&quot;: &quot;ShipOrderEvent&quot;
+    },
+    {
+        &quot;createdAt&quot;: &quot;2017093012112008343880083000000&quot;,
+        &quot;transactionId&quot;: &quot;a6d3c929e35&quot;,
+        &quot;type&quot;: &quot;DeliveryOrderEvent&quot;
+    }
+]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="links-3">6.2. links</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="https://www.youtube.com/watch?v=bVnjI0XOA9w">An Architecture with CQRS and Event Sourcing by Eugen Paraschiv</a></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="links-4">7. links</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -880,7 +1072,7 @@ bash gradles s-b-g-j-c-p:webResources -t</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="enjoy">7. Enjoy! :)</h2>
+<h2 id="enjoy">8. Enjoy! :)</h2>
 <div class="sectionbody">
 
 </div>
@@ -889,7 +1081,7 @@ bash gradles s-b-g-j-c-p:webResources -t</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 0.4.1<br>
-Last updated 2017-09-23 04:19:13 EEST
+Last updated 2017-09-30 02:07:56 EEST
 </div>
 </div>
 </body>
