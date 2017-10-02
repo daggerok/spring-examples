@@ -1,0 +1,21 @@
+= Axon Framework image:https://travis-ci.org/daggerok/spring-examples.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/spring-examples"]
+
+//tag::content[]
+
+Axon banking app
+
+=== old
+
+.start app, open 2 browser windows and start chatting
+[source,bash]
+----
+bash gradlew bootRun
+open http://localhost:8080 # browser 1
+open http://localhost:8080 # browser 2
+----
+
+=== links
+
+. link:https://www.youtube.com/watch?v=s2zH7BsqtAk&feature=youtu.be[Getting started with Axon 3 live coding webinar recording]
+
+//end::content02[]

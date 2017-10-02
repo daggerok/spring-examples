@@ -33,6 +33,9 @@ include::../../05-testing/README.adoc[tags=content]
 == CQRS and Event-Sourcing
 include::../../06-cqrs-and-eventsourcing/README.adoc[tags=content]
 
+== Axon Framework
+include::../../07-axon-banking/README.adoc[tags=content]
+
 == links
 include::includes/Links.adoc[]
 
