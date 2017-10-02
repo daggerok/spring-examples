@@ -1083,16 +1083,12 @@ a6d3c929e35
 </div>
 <div class="sect2">
 <h3 id="old">7.1. old</h3>
-<div class="paragraph">
-<p>open 2 browser windows and start chatting</p>
-</div>
 <div class="listingblock">
-<div class="title">or use console</div>
+<div class="title">start app, open 2 browser windows and start chatting</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">curl localhost:8080/subscriptions # terminal 1
-http --timeout 2629746000 --stream :8080/subscriptions # terminal 2
-http post :8080/subscriptions/broadcast message=&quot;trololo&quot; # send message to all subscribers
-http delete :8080/subscriptions/2017-09-22-01-18-22-693 # unsubscribe by id</code></pre>
+<pre class="CodeRay highlight"><code data-lang="bash">bash gradlew bootRun
+open http://localhost:8080 # browser 1
+open http://localhost:8080 # browser 2</code></pre>
 </div>
 </div>
 </div>
@@ -1101,13 +1097,7 @@ http delete :8080/subscriptions/2017-09-22-01-18-22-693 # unsubscribe by id</cod
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="https://golb.hplar.ch/p/Server-Sent-Events-with-Spring">Link</a></p>
-</li>
-<li>
-<p><a href="https://infinitescript.com/2015/06/use-server-sent-event-in-spring-4-2/">Other link</a></p>
-</li>
-<li>
-<p><a href="https://html.spec.whatwg.org/multipage/server-sent-events.html#the-eventsource-interface">Server-sent events</a></p>
+<p><a href="https://www.youtube.com/watch?v=s2zH7BsqtAk&amp;feature=youtu.be">Getting started with Axon 3 live coding webinar recording</a></p>
 </li>
 </ol>
 </div>
