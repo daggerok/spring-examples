@@ -1,6 +1,7 @@
 buildscript {
   ext {
     springBootVersion = "1.5.7.RELEASE"
+    springCloudVersion = "Dalston.SR3"
   }
 }
 
@@ -35,8 +36,15 @@ subprojects { subproject ->
   dependencies {
     compileOnly("org.projectlombok:lombok")
     compile("io.vavr:vavr:0.9.1")
-    runtime("org.springframework.boot:spring-boot-devtools")
+    compile("org.springframework.boot:spring-boot-actuator")
+    compile("org.springframework.cloud:spring-cloud-starter-bus-amqp")
     testCompile("org.springframework.boot:spring-boot-starter-test")
+  }
+
+  dependencyManagement {
+    imports {
+      mavenBom "org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion"
+    }
   }
 
   springBoot.executable = true
