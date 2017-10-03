@@ -1,5 +1,6 @@
 package daggerok.messages;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.val;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,10 +9,8 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.annotation.*;
-import static com.fasterxml.jackson.databind.SerializationFeature.*;
-import static com.fasterxml.jackson.annotation.JsonInclude.Include.*;
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 @Configuration
 public class SseConfig {

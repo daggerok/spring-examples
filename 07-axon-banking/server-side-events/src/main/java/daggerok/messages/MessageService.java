@@ -18,9 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
-import static daggerok.messages.Type.*;
 import static java.util.Arrays.asList;
-import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
 
 @Slf4j
@@ -28,14 +26,28 @@ import static java.util.Optional.ofNullable;
 @RequiredArgsConstructor
 public class MessageService {
 
-  static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-s-SSS");
   public static final List<String> ignores = asList(
       "ResponseBodyEmitter is already set complete",
       "Broken pipe"
   );
-
+  static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-s-SSS");
   @Qualifier("sseEmitterRepository")
   final Map<String, SseEmitter> sseEmitterRepository;
+
+  static Event connectMessage(final String subscriptionId) {
+    return new Event().setId(subscriptionId)
+                      .setType(Type.CONNECT);
+  }
+
+  static Event disconnectMessage(final String subscriptionId) {
+    return new Event().setId(subscriptionId)
+                      .setType(Type.DISCONNECT);
+  }
+
+  static Event timeoutMessage(final String subscriptionId) {
+    return new Event().setId(subscriptionId)
+                      .setType(Type.TIMEOUT);
+  }
 
   public SseEmitter create() {
     val sseEmitter = new SseEmitter(Long.MAX_VALUE);
@@ -98,20 +110,5 @@ public class MessageService {
 
   private void notify(final Serializable payload) {
     sseEmitterRepository.forEach((id, sseEmitter) -> send(id, sseEmitter, payload));
-  }
-
-  static Event connectMessage(final String subscriptionId) {
-    return new Event().setId(subscriptionId)
-                      .setType(Type.CONNECT);
-  }
-
-  static Event disconnectMessage(final String subscriptionId) {
-    return new Event().setId(subscriptionId)
-                      .setType(Type.DISCONNECT);
-  }
-
-  static Event timeoutMessage(final String subscriptionId) {
-    return new Event().setId(subscriptionId)
-                      .setType(Type.TIMEOUT);
   }
 }

@@ -6,6 +6,6 @@ RUN mkdir -p /opt/app \
 WORKDIR /opt/app
 VOLUME ["/opt/app"]
 ENTRYPOINT ["java", "-jar", "./app.jar"]
-EXPOSE 8080
-HEALTHCHECK --interval=5s --timeout=5s --retries=5 CMD curl -f http://127.0.0.1:8080/health || exit 1
+EXPOSE 8002
+HEALTHCHECK --interval=5s --timeout=5s --retries=5 CMD curl -f http://127.0.0.1:8002/health || exit 1
 COPY ./axonbank/build/libs/*.jar ./app.jar

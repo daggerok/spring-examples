@@ -19,14 +19,12 @@ import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME
 @JsonIgnoreProperties(ignoreUnknown = true)
 public final class Event implements Serializable {
 
-  private static final long serialVersionUID = 3437698182253923475L;
   static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:s.SSS");
-
+  private static final long serialVersionUID = 3437698182253923475L;
+  final String createdAt = now().format(FORMAT);
   String id;
   String message;
-
   @DateTimeFormat(iso = DATE_TIME)
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   Type type = Type.MESSAGE;
-  final String createdAt = now().format(FORMAT);
 }
