@@ -10,8 +10,8 @@ Axon banking app
 [source,bash]
 ----
 bash gradlew bootRun
-open http://localhost:8080 # browser 1
-open http://localhost:8080 # browser 2
+open http://localhost:8001 # browser 1
+open http://localhost:8001 # browser 2
 ----
 
 === links
