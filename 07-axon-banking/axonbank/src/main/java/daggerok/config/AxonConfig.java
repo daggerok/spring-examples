@@ -41,7 +41,13 @@ public class AxonConfig {
   }
 
   @Bean
-  public TransactionManager axonTransactionManager() {
+  public TransactionManager springTransactionManager() {
     return new SpringTransactionManager(platformTransactionManager);
   }
+/* // not worked: No EntityManager with actual transaction available for current thread - cannot reliably process 'persist' call
+  @Bean
+  public CommandBus commandBus() {
+    return new AsynchronousCommandBus();
+  }
+*/
 }
