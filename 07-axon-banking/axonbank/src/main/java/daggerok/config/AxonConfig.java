@@ -2,9 +2,12 @@ package daggerok.config;
 
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.axonframework.commandhandling.AsynchronousCommandBus;
+import org.axonframework.commandhandling.CommandBus;
 import org.axonframework.common.jdbc.ConnectionProvider;
 import org.axonframework.common.transaction.TransactionManager;
 import org.axonframework.eventsourcing.eventstore.EventStorageEngine;
+import org.axonframework.eventsourcing.eventstore.inmemory.InMemoryEventStorageEngine;
 import org.axonframework.eventsourcing.eventstore.jdbc.JdbcEventStorageEngine;
 import org.axonframework.spring.jdbc.SpringDataSourceConnectionProvider;
 import org.axonframework.spring.messaging.unitofwork.SpringTransactionManager;
@@ -26,8 +29,13 @@ public class AxonConfig {
 
   @Bean
   public EventStorageEngine eventStorageEngine() {
-    // return new InMemoryEventStorageEngine();
-    return new JdbcEventStorageEngine(connectionProvider(), transactionManager());
+    return new InMemoryEventStorageEngine();
+    //return new JdbcEventStorageEngine(connectionProvider(), transactionManager());
+  }
+
+  @Bean
+  public CommandBus commandBus() {
+    return new AsynchronousCommandBus();
   }
 
   private TransactionManager transactionManager() {
