@@ -540,7 +540,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">Maksim Kostromin</span><br>
 <span id="email" class="email"><a href="mailto:daggerok@gmail.com">daggerok@gmail.com</a></span><br>
 <span id="revnumber">version 0.4.1,</span>
-<span id="revdate">2017-10-03 02:13:38 EEST</span>
+<span id="revdate">2017-10-08 21:19:35 EEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -584,9 +584,11 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel2">
 <li><a href="#old">7.1. old</a></li>
 <li><a href="#links-4">7.2. links</a></li>
+<li><a href="#main-flow">7.3. main flow</a></li>
+<li><a href="#links-5">7.4. links</a></li>
 </ul>
 </li>
-<li><a href="#links-5">8. links</a></li>
+<li><a href="#links-6">8. links</a></li>
 <li><a href="#enjoy">9. Enjoy! :)</a></li>
 </ul>
 </div>
@@ -1097,7 +1099,37 @@ open http://localhost:8001 # browser 2</code></pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="https://www.youtube.com/watch?v=s2zH7BsqtAk&amp;feature=youtu.be">Getting started with Axon 3 live coding webinar recording</a></p>
+<p><a href="http://www.axonframework.org/docs/1.2/testing.html">Axon testing</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=s2zH7BsqtAk&amp;feature=youtu.be">Getting started with Axon 3</a></p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="title">TODO - something wrong with persistence</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">Command 'daggerok.core.CreateComplaintCommand' resulted in ...EventStoreException(An event with identifier [...] could not be persisted)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="main-flow">7.3. main flow</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">bash gradlew bootRun
+http :8080
+http post :8080 company=first description=&quot;oh, no!&quot;
+http :8080/uuid...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="links-5">7.4. links</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="https://www.youtube.com/watch?v=Jp-rW-XOYzA">axon complaints app</a></p>
 </li>
 </ol>
 </div>
@@ -1105,7 +1137,7 @@ open http://localhost:8001 # browser 2</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="links-5">8. links</h2>
+<h2 id="links-6">8. links</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -1126,7 +1158,7 @@ open http://localhost:8001 # browser 2</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 0.4.1<br>
-Last updated 2017-10-03 02:13:38 EEST
+Last updated 2017-10-08 21:19:35 EEST
 </div>
 </div>
 </body>
