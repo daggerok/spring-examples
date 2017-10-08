@@ -18,10 +18,10 @@ public class User {
   UserStatus state = INITIALIZED;
   String nickname = "";
 
-  public void activate() {
-    if (isActivated())
-      throw new IllegalStateException();
-    this.state = ACTIVATED;
+  public void activate() { // behaviour
+    if (isActivated()) // invariant
+      throw new IllegalStateException(); // NACK
+    this.state = ACTIVATED; // ACK: changing state
   }
 
   public void deactivate() {
