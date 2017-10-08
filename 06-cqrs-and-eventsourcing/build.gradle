@@ -27,7 +27,7 @@ allprojects {
   }
 
   wrapper {
-    gradleVersion = "4.2"
+    gradleVersion = "4.2.1"
     distributionType = "ALL"
   }
 }

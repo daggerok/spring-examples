@@ -34,6 +34,7 @@ subprojects {
     compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.8")
     compile("io.vavr:vavr:0.9.1")
     runtime("org.springframework.boot:spring-boot-devtools")
+    testCompileOnly("org.projectlombok:lombok")
     testCompile("org.springframework.boot:spring-boot-starter-test")
   }
 
@@ -41,5 +42,10 @@ subprojects {
     imports {
       mavenBom "org.springframework.boot:spring-boot-starter-parent:$springBootVersion"
     }
+  }
+
+  wrapper {
+    gradleVersion = "4.2.1"
+    distributionType = "ALL"
   }
 }

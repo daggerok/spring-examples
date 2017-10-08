@@ -1,4 +1,4 @@
 include ":spring-boot-webpack"
 include ":spring-boot-webpack:ui"
 include ":spring-boot-wro4j"
-include ":spring-boot-js-plugin"
+include ":spring-boot-gradle-js-css-plugin"

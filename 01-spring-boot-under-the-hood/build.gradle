@@ -44,4 +44,9 @@ allprojects {
       included = true
     }
   }
+
+  wrapper {
+    gradleVersion = "4.2.1"
+    distributionType = "ALL"
+  }
 }

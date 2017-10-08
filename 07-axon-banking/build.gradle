@@ -5,9 +5,11 @@ buildscript {
     axonVersion = "3.0.6"
     kotlinVersion = "1.1.51"
   }
+
   repositories {
     mavenCentral()
   }
+
   dependencies {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
   }
@@ -47,6 +49,11 @@ allprojects { subproject ->
     kotlinOptions {
       jvmTarget = "1.8"
     }
+  }
+
+  wrapper {
+    gradleVersion = "4.2.1"
+    distributionType = "ALL"
   }
 }
 

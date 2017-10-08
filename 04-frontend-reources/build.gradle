@@ -21,6 +21,11 @@ allprojects {
   repositories {
     mavenCentral()
   }
+
+  wrapper {
+    gradleVersion = "4.2.1"
+    distributionType = "ALL"
+  }
 }
 
 subprojects {
