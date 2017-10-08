@@ -1,5 +1,6 @@
 package daggerok.domain.user;
 
+import daggerok.domain.user.event.DomainEvent;
 import daggerok.domain.user.event.NicknameChangedEvent;
 import daggerok.domain.user.event.UserActivatedEvent;
 import daggerok.domain.user.event.UserDeactivatedEvent;
@@ -7,6 +8,8 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static daggerok.domain.user.UserStatus.*;
@@ -17,6 +20,8 @@ import static lombok.AccessLevel.PRIVATE;
 @RequiredArgsConstructor
 @FieldDefaults(level = PRIVATE)
 public class User {
+
+  List<DomainEvent> changes = new ArrayList<>();
 
   final UUID id;
   UserStatus state = INITIALIZED;
@@ -32,6 +37,7 @@ public class User {
 
   private void userActivated(final UserActivatedEvent event) {
     state = ACTIVATED;
+    changes.add(event);
   }
 
   public void changeNickname(final String newNickname) {
@@ -42,6 +48,7 @@ public class User {
 
   private void nicknameChanged(NicknameChangedEvent event) {
     nickname = event.getNickname();
+    changes.add(event);
   }
 
   public void deactivate() {
@@ -53,6 +60,7 @@ public class User {
 
   private void userDeactivated(final UserDeactivatedEvent event) {
     state = DEACTIVATED;
+    changes.add(event);
   }
 
   public boolean isActivated() {

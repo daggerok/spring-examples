@@ -1,4 +1,4 @@
-= CQRS and Event sourcing on Spring CLoud Stream image:https://travis-ci.org/daggerok/spring-examples.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/spring-examples"]
+= CQRS and Event sourcing on Spring Cloud Stream image:https://travis-ci.org/daggerok/spring-examples.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/spring-examples"]
 
 //tag::content[]
 
