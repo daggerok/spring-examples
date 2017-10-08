@@ -1,0 +1,7 @@
+db:
+  name: ${DB_NAME:postgres}
+  user: ${DB_USER:postgres}
+  pass: ${DB_PASSWORD:postgres}
+  server:
+    host: ${DB_HOST:localhost}
+    port: ${DB_PORT:5432}

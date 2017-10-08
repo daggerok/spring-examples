@@ -1,0 +1,10 @@
+dependencies {
+  compile("org.springframework.boot:spring-boot-starter-amqp")
+  compile("org.springframework.boot:spring-boot-starter-data-jpa")
+  compile("org.springframework.boot:spring-boot-starter-data-rest")
+  compile("org.springframework.boot:spring-boot-starter-web")
+  compile("org.axonframework:axon-spring:$axonVersion")
+  runtime("org.springframework.boot:spring-boot-devtools")
+  runtime("org.postgresql:postgresql")
+  compileOnly("org.projectlombok:lombok")
+}

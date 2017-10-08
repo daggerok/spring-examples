@@ -1,0 +1,25 @@
+= Axon Framework image:https://travis-ci.org/daggerok/spring-examples.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/spring-examples"]
+
+//tag::content[]
+
+.TODO - something wrong with persistence
+[source,bash]
+----
+Command 'daggerok.core.CreateComplaintCommand' resulted in ...EventStoreException(An event with identifier [...] could not be persisted)
+----
+
+=== main flow
+
+[source,bash]
+----
+bash gradlew bootRun
+http :8080
+http post :8080 company=first description="oh, no!"
+http :8080/uuid...
+----
+
+=== links
+
+. link:https://www.youtube.com/watch?v=Jp-rW-XOYzA[axon complaints app]
+
+//end::content02[]
