@@ -70,6 +70,8 @@ subprojects { subproject ->
   dependencies {
     compileOnly("org.projectlombok:lombok")
     compile("io.vavr:vavr:0.9.1")
+    compile("io.javaslang:javaslang:2.0.6")
+    compile("com.google.guava:guava:23.0")
     compile("org.springframework.boot:spring-boot-actuator")
     compile("org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion")
   }

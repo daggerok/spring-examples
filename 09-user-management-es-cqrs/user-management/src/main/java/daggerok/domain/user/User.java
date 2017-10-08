@@ -1,5 +1,6 @@
 package daggerok.domain.user;
 
+import com.google.common.collect.ImmutableList;
 import daggerok.domain.user.event.DomainEvent;
 import daggerok.domain.user.event.NicknameChangedEvent;
 import daggerok.domain.user.event.UserActivatedEvent;
@@ -7,6 +8,8 @@ import daggerok.domain.user.event.UserDeactivatedEvent;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.val;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,46 +24,53 @@ import static lombok.AccessLevel.PRIVATE;
 @FieldDefaults(level = PRIVATE)
 public class User {
 
-  List<DomainEvent> changes = new ArrayList<>();
-
   final UUID id;
   UserStatus state = INITIALIZED;
   String nickname = "";
+
+  List<DomainEvent> changes = new ArrayList<>();
+
+  public List<DomainEvent> getChanges() {
+    return ImmutableList.copyOf(changes);
+  }
 
   public void activate() { // behaviour
     if (isActivated()) // invariant
       throw new IllegalStateException(); // NACK
     //// ACK
     //this.state = ACTIVATED; // changing state
-    userActivated(new UserActivatedEvent(now()));
+    on(new UserActivatedEvent(now()));
   }
 
-  private void userActivated(final UserActivatedEvent event) {
+  private User on(final UserActivatedEvent event) {
     state = ACTIVATED;
     changes.add(event);
+    return this;
   }
 
   public void changeNickname(final String newNickname) {
     if (isDeactivated())
       throw new IllegalStateException();
-    nicknameChanged(new NicknameChangedEvent(newNickname, now()));
+    on(new NicknameChangedEvent(newNickname, now()));
   }
 
-  private void nicknameChanged(NicknameChangedEvent event) {
+  private User on(NicknameChangedEvent event) {
     nickname = event.getNickname();
     changes.add(event);
+    return this;
   }
 
   public void deactivate() {
     if (isDeactivated())
       throw new IllegalStateException();
     //this.state = DEACTIVATED;
-    userDeactivated(new UserDeactivatedEvent(now()));
+    on(new UserDeactivatedEvent(now()));
   }
 
-  private void userDeactivated(final UserDeactivatedEvent event) {
+  private User on(final UserDeactivatedEvent event) {
     state = DEACTIVATED;
     changes.add(event);
+    return this;
   }
 
   public boolean isActivated() {
@@ -74,4 +84,38 @@ public class User {
   String getNickname() {
     return this.nickname;
   }
+
+  public void flush() {
+    this.changes.clear();
+  }
+
+  // vavr:
+  public static User recreatedFrom(final UUID id, final List<DomainEvent> domainEvents) {
+    if (CollectionUtils.isEmpty(domainEvents)) return null;
+    val initialState = new User(id);
+    return io.vavr.collection.List.ofAll(domainEvents).foldLeft(initialState, User::handleStateRecreationVavr);
+  }
+
+  private User handleStateRecreationVavr(final DomainEvent domainEvent) {
+    return io.vavr.API.Match(domainEvent).of(
+        io.vavr.API.Case(io.vavr.API.$(io.vavr.Predicates.instanceOf(NicknameChangedEvent.class)), this::on),
+        io.vavr.API.Case(io.vavr.API.$(io.vavr.Predicates.instanceOf(UserActivatedEvent.class)), this::on),
+        io.vavr.API.Case(io.vavr.API.$(io.vavr.Predicates.instanceOf(UserDeactivatedEvent.class)), this::on)
+    );
+  }
+/*  // javaslang:
+  public static User recreatedFrom(final UUID id, final List<DomainEvent> domainEvents) {
+    if (CollectionUtils.isEmpty(domainEvents)) return null;
+    val initialState = new User(id);
+    return javaslang.collection.List.ofAll(domainEvents).foldLeft(initialState, User::handleStateRecreationJavaslang);
+  }
+
+  private User handleStateRecreationJavaslang(final DomainEvent domainEvent) {
+    return javaslang.API.Match(domainEvent).of(
+        javaslang.API.Case(javaslang.Predicates.instanceOf(NicknameChangedEvent.class), this::on),
+        javaslang.API.Case(javaslang.Predicates.instanceOf(UserActivatedEvent.class), this::on),
+        javaslang.API.Case(javaslang.Predicates.instanceOf(UserDeactivatedEvent.class), this::on)
+    );
+  }
+*/
 }
