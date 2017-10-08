@@ -30,12 +30,17 @@ public class AxonConfig {
   final PlatformTransactionManager platformTransactionManager;
 
   @Bean
+  public TransactionManager springTransactionManager() {
+    return new SpringTransactionManager(platformTransactionManager);
+  }
+
+  @Bean // don't wary, aggregator will be stored in persistent db...
   public EventStorageEngine eventStorageEngine() {
     return new InMemoryEventStorageEngine();
   }
 
   @Bean(name = "accountRepository")
-  public Repository<Account> axonAccountRepository(final EventBus eventBus) {
+  public Repository<Account> accountRepository(final EventBus eventBus) {
     return new GenericJpaRepository<>(axonEntityManagerProvider(), Account.class, eventBus);
   }
 
@@ -45,20 +50,9 @@ public class AxonConfig {
   }
 
   @Bean
-  public TransactionManager springTransactionManager() {
-    return new SpringTransactionManager(platformTransactionManager);
-  }
-
-  @Bean
   public CommandBus asynchronousCommandBus() {
     SimpleCommandBus commandBus = new AsynchronousCommandBus();
     commandBus.registerHandlerInterceptor(new TransactionManagingInterceptor(springTransactionManager()));
     return commandBus;
   }
-/* // not worked: No EntityManager with actual transaction available for current thread - cannot reliably process 'persist' call
-  @Bean
-  public CommandBus commandBus() {
-    return new AsynchronousCommandBus();
-  }
-*/
 }

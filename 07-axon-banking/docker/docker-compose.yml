@@ -27,34 +27,9 @@ services:
     networks: [backing-services]
     restart: unless-stopped
 
-#  app:
-#    depends_on:
-#      postgres:
-#        condition: service_healthy
-#      rabbitmq:
-#        condition: service_healthy
-#    build:
-#      context: ..
-#      dockerfile: ./docker/axonbank/Dockerfile
-#    environment:
-#      SPRING_RABBITMQ_PORT: 5672
-#      SPRING_RABBITMQ_HOST: rabbitmq
-#      SPRING_RABBITMQ_USERNAME: rabbitmq
-#      SPRING_RABBITMQ_PASSWORD: rabbitmq
-#      DB_PORT: 5432
-#      DB_HOST: postgres
-#      DB_NAME: postgres
-#      DB_USER: postgres
-#      DB_PASSWORD: postgres
-#    volumes: ["app-data:/opt/app"]
-#    ports: ["8002:8002"]
-#    networks: [backing-services]
-#    restart: unless-stopped
-
 volumes:
   postgres-data: {}
   rabbitmq-data: {}
-#  app-data: {}
 
 networks:
   backing-services:

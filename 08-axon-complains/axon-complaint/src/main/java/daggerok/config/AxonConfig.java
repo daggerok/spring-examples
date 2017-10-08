@@ -14,6 +14,7 @@ import org.axonframework.common.jpa.ContainerManagedEntityManagerProvider;
 import org.axonframework.common.jpa.EntityManagerProvider;
 import org.axonframework.common.transaction.TransactionManager;
 import org.axonframework.eventhandling.EventBus;
+import org.axonframework.eventsourcing.eventstore.EventStorageEngine;
 import org.axonframework.eventsourcing.eventstore.inmemory.InMemoryEventStorageEngine;
 import org.axonframework.eventsourcing.eventstore.jpa.JpaEventStorageEngine;
 import org.axonframework.messaging.interceptors.TransactionManagingInterceptor;
@@ -39,13 +40,6 @@ public class AxonConfig {
   final PlatformTransactionManager platformTransactionManager;
 
   @Bean
-  public JpaEventStorageEngine eventStorageEngine() {
-    val res = new JpaEventStorageEngine(entityManagerProvider(), springTransactionManager());
-    res.appendEvents();
-    return res;
-  }
-
-  @Bean
   public EntityManagerProvider entityManagerProvider() {
     val entityManagerProvider = new ContainerManagedEntityManagerProvider();
     entityManagerProvider.setEntityManager(entityManager);
@@ -55,6 +49,18 @@ public class AxonConfig {
   @Bean
   public TransactionManager springTransactionManager() {
     return new SpringTransactionManager(platformTransactionManager);
+  }
+/*
+  @Bean
+  public JpaEventStorageEngine eventStorageEngine() {
+    val res = new JpaEventStorageEngine(entityManagerProvider(), springTransactionManager());
+    res.appendEvents();
+    return res;
+  }
+*/
+  @Bean // don't wary, aggregator will be stored in persistent db...
+  public EventStorageEngine eventStorageEngine() {
+    return new InMemoryEventStorageEngine();
   }
 
   @Bean(name = "complaintRepository")

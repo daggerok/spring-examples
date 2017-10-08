@@ -4,4 +4,6 @@ spring:
       - app-config
       - db-props
       - db
+      - mq-props
       - mq
+      - axon
