@@ -1,4 +1,5 @@
 plugins {
+  id "base"
   id "org.asciidoctor.convert" version "1.5.3"
   id "org.ajoberstar.git-publish" version "0.3.0"
 }
@@ -41,5 +42,9 @@ gitPublish {
   }
 }
 
-gitPublishPush.dependsOn asciidoctor
-gitPublishPush.shouldRunAfter clean, asciidoctor
+build. dependsOn asciidoctor
+
+task deploy {
+  dependsOn gitPublishPush
+  shouldRunAfter clean, build
+}

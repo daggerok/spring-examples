@@ -35,6 +35,7 @@ include::../../06-cqrs-and-eventsourcing/README.adoc[tags=content]
 
 == Axon Framework
 include::../../07-axon-banking/README.adoc[tags=content]
+include::../../08-axon-complains/README.adoc[tags=content]
 
 == links
 include::includes/Links.adoc[]

@@ -2,14 +2,6 @@
 
 //tag::content[]
 
-.TODO - something wrong with persistence
-[source,bash]
-----
-Command 'daggerok.core.CreateComplaintCommand' resulted in ...EventStoreException(An event with identifier [...] could not be persisted)
-----
-
-=== main flow
-
 [source,bash]
 ----
 bash gradlew bootRun

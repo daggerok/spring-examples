@@ -33,6 +33,7 @@ script:
   - export ROOT=$PWD
   - >
     for path in \
+      08-axon-complains \
       07-axon-banking \
       06-cqrs-and-eventsourcing \
       04-wro4j \

@@ -42,4 +42,8 @@ Transfer-Encoding: chunked
 }
 ----
 
+links:
+
+. link:http://www.baeldung.com/spring-retry[good one]
+
 //end::content[]
