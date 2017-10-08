@@ -1,0 +1,19 @@
+plugins {
+  id "com.avast.gradle.docker-compose" version "0.5.4"
+}
+
+dockerCompose {
+  useComposeFiles = ["${root()}/docker/docker-compose.yml"]
+  captureContainersOutput = true
+  stopContainers = true
+  removeContainers = true
+  removeImages = "Local"
+  removeVolumes = true
+  removeOrphans = true
+  projectName = "$project.name"
+}
+
+// fix windows paths, replace all "\\" with "/"
+def root() {
+  rootDir.absolutePath.replaceAll("\\\\", "/")
+}

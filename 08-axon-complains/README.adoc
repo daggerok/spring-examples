@@ -2,6 +2,8 @@
 
 //tag::content[]
 
+_Axon complaints app_
+
 [source,bash]
 ----
 bash gradlew bootRun

@@ -1,0 +1,6 @@
+mq:
+  server:
+    host: ${$SPRING_RABBITMQ_HOST:localhost}
+    port: ${$SPRING_RABBITMQ_PORT:5672}
+  user: ${$SPRING_RABBITMQ_USERNAME:rabbitmq}
+  pass: ${$SPRING_RABBITMQ_PASSWORD:rabbitmq}

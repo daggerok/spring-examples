@@ -1,0 +1,13 @@
+= CQRS and Event sourcing on Spring CLoud Stream image:https://travis-ci.org/daggerok/spring-examples.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/spring-examples"]
+
+//tag::content[]
+
+_Spring Cloud Stream | CQRS and Event Sourcing_
+
+[source,bash]
+----
+bash gradlew clean build
+bash gradlew bootRun
+----
+
+//end::content02[]

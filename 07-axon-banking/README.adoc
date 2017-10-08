@@ -2,7 +2,7 @@
 
 //tag::content[]
 
-Axon banking app
+_Axon banking app_
 
 === old
 

@@ -1,0 +1,61 @@
+version: "2.1"
+
+services:
+
+  postgres:
+    #image: healthcheck/postgres:alpine
+    build: ./postgres
+    ports: ["5432:5432"]
+    volumes: ["postgres-data:/var/lib/postgresql/data"]
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks: [backing-services]
+
+  rabbitmq:
+    build: ./rabbitmq
+    volumes:
+      - "rabbitmq-data:/var/lib/rabbitmq"
+      - "rabbitmq-data:/etc/rabbitmq"
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks: [backing-services]
+    restart: unless-stopped
+
+  app:
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    build:
+      context: ..
+      dockerfile: ../user-management/Dockerfile
+    environment:
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_USERNAME: rabbitmq
+      SPRING_RABBITMQ_PASSWORD: rabbitmq
+      DB_PORT: 5432
+      DB_HOST: postgres
+      DB_NAME: postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    volumes: ["app-data:/opt/app"]
+    ports: ["8080:8080"]
+    networks: [backing-services]
+    restart: unless-stopped
+
+volumes:
+  postgres-data: {}
+  rabbitmq-data: {}
+  app-data: {}
+
+networks:
+  backing-services:
+    driver: bridge
