@@ -15,7 +15,7 @@ class UserRepositoryEventSourcedTest extends Specification {
 
   UserRepository repository = new UserRepositoryEventSourced()
 
-  def 'should be able to save and load users'() {
+  def "should be able to save and load users"() {
     given:
       UUID id = UUID.randomUUID()
     and:
@@ -23,7 +23,7 @@ class UserRepositoryEventSourcedTest extends Specification {
     and:
       user.activate()
     and:
-      user.changeNickname('max')
+      user.changeNickname("max")
     and:
       repository.save(user)
     when:
@@ -33,10 +33,10 @@ class UserRepositoryEventSourcedTest extends Specification {
     and:
       userFromDb.isActivated()
     and:
-      userFromDb.nickname == 'max'
+      userFromDb.nickname == "max"
   }
 
-  def 'should be able to save and load historical data'() {
+  def "should be able to save and load historical user state"() {
     given:
       UUID id = UUID.randomUUID()
     and:
@@ -50,12 +50,12 @@ class UserRepositoryEventSourcedTest extends Specification {
       Instant stop2 = Instant.now()
       sleep(1500)
     and:
-      user.changeNickname('max')
+      user.changeNickname("max")
       repository.save(user)
       Instant stop3 = Instant.now()
       sleep(1500)
     and:
-      user.changeNickname('fax')
+      user.changeNickname("fax")
       user.deactivate()
       repository.save(user)
     when:
@@ -66,15 +66,15 @@ class UserRepositoryEventSourcedTest extends Specification {
       User v1 = historicalRepository.findFromHistory(id, stop1)
     then:
       latest.state == DEACTIVATED
-      latest.nickname == 'fax'
+      latest.nickname == "fax"
     and:
       v3.state == ACTIVATED
-      v3.nickname == 'max'
+      v3.nickname == "max"
     and:
       v2.state == ACTIVATED
-      v2.nickname == 'anonymous'
+      v2.nickname == "anonymous"
     and:
-      v1.nickname == 'anonymous'
+      v1.nickname == "anonymous"
       v1.state == INITIALIZED
   }
 }
