@@ -7,8 +7,11 @@ _Spring Cloud Stream | CQRS and Event Sourcing_
 [source,bash]
 ----
 bash gradlew clean build
-bash gradlew bootRun
+bash gradlew bootRun --parallel
+open http://localhost:8001
 ----
+
+Flow still buggy, but i'm too lazy to fix...
 
 .create user command
 [source,bash]
@@ -17,16 +20,12 @@ http post :8080/
 
 [
     {
-        "href": "http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d",
+        "href": "http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3",
         "rel": "self"
     },
     {
-        "href": "http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d/activate",
+        "href": "http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3/activate",
         "rel": "activate"
-    },
-    {
-        "href": "http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d/replay",
-        "rel": "replay"
     }
 ]
 ----
@@ -34,17 +33,17 @@ http post :8080/
 .get user query
 [source,bash]
 ----
-http http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d
+http http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3
 
 {
     "activated": false,
     "changes": [
         {
-            "id": "88f2829a-a1e7-4655-8d4d-83c812ab9a2d"
+            "id": "47401f30-b3f1-4204-9ea4-bdb8c394d0b3"
         }
     ],
     "deactivated": false,
-    "id": "88f2829a-a1e7-4655-8d4d-83c812ab9a2d",
+    "id": "47401f30-b3f1-4204-9ea4-bdb8c394d0b3",
     "nickname": "anonymous",
     "state": "INITIALIZED"
 }
@@ -53,44 +52,89 @@ http http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d
 .activate user command
 [source,bash]
 ----
-http post http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d/activate
-# ...
-----
-
-.replay user events query
-----
-http http http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d/replay
+http post http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3/activate
 
 [
     {
-        "UserInitializedEvent": {
-            "id": "88f2829a-a1e7-4655-8d4d-83c812ab9a2d"
-        }
+        "href": "http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3",
+        "rel": "self"
     },
     {
-        "UserActivatedEvent": {}
+        "href": "http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3/change-nickname/newNickname",
+        "rel": "change-nickname"
     }
 ]
 ----
 
-.get user again
+.change user nickname command
 [source,bash]
 ----
-http http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d
+http post http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3/change-nickname/max
 
-{
-    "activated": true,
-    "changes": [
-        {
-            "id": "88f2829a-a1e7-4655-8d4d-83c812ab9a2d"
-        },
-        {}
-    ],
-    "deactivated": false,
-    "id": "88f2829a-a1e7-4655-8d4d-83c812ab9a2d",
-    "nickname": "anonymous",
-    "state": "ACTIVATED"
-}
+[
+    {
+        "href": "http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3",
+        "rel": "self"
+    },
+    {
+        "href": "http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3/deactivate",
+        "rel": "deactivate"
+    }
+]
+----
+
+.deactivate user events command
+----
+http post http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3/deactivate
+
+[
+    {
+        "href": "http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3",
+        "rel": "self"
+    },
+    {
+        "href": "http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3/replay",
+        "rel": "replay"
+    }
+]
+----
+
+.replay user events query
+----
+http http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3/replay
+
+[
+    {
+        "UserInitializedEvent": {
+            "id": "47401f30-b3f1-4204-9ea4-bdb8c394d0b3"
+        }
+    },
+    {
+        "UserActivatedEvent": {}
+    },
+    {
+        "UserActivatedEvent": {}
+    },
+    {
+        "NicknameChangedEvent": {
+            "nickname": "max"
+        }
+    },
+    {
+        "UserActivatedEvent": {}
+    },
+    {
+        "UserActivatedEvent": {}
+    },
+    {
+        "NicknameChangedEvent": {
+            "nickname": "max"
+        }
+    },
+    {
+        "UserDeactivatedEvent": {}
+    }
+]
 ----
 
 resources:
