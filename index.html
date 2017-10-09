@@ -540,7 +540,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">Maksim Kostromin</span><br>
 <span id="email" class="email"><a href="mailto:daggerok@gmail.com">daggerok@gmail.com</a></span><br>
 <span id="revnumber">version 0.4.1,</span>
-<span id="revdate">2017-10-08 21:19:35 EEST</span>
+<span id="revdate">2017-10-08 22:40:48 EEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -557,6 +557,7 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel2">
 <li><a href="#test">2.1. test</a></li>
 <li><a href="#links-2">2.2. links</a></li>
+<li><a href="#todo">2.3. TODO</a></li>
 </ul>
 </li>
 <li><a href="#retry">3. retry</a>
@@ -584,8 +585,7 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel2">
 <li><a href="#old">7.1. old</a></li>
 <li><a href="#links-4">7.2. links</a></li>
-<li><a href="#main-flow">7.3. main flow</a></li>
-<li><a href="#links-5">7.4. links</a></li>
+<li><a href="#links-5">7.3. links</a></li>
 </ul>
 </li>
 <li><a href="#links-6">8. links</a></li>
@@ -727,6 +727,22 @@ http delete :8080/subscriptions/2017-09-22-01-18-22-693 # unsubscribe by id</cod
 </ol>
 </div>
 </div>
+<div class="sect2">
+<h3 id="todo">2.3. TODO</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="http://async-io.org/">atmosphere</a></p>
+</li>
+<li>
+<p><a href="https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-atmosphere">spring-boot atmosphere</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=E9phxEKUFCo">DISAP</a></p>
+</li>
+</ol>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -771,6 +787,16 @@ Transfer-Encoding: chunked
     &quot;error&quot;: &quot;fuck...&quot;
 }</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>links:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="http://www.baeldung.com/spring-retry">good one</a></p>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -1074,6 +1100,112 @@ a6d3c929e35
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><em>Spring Cloud Stream | CQRS and Event Sourcing</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">bash gradlew clean build
+bash gradlew bootRun</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">create user command</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">http post :8080/
+
+[
+    {
+        &quot;href&quot;: &quot;http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d&quot;,
+        &quot;rel&quot;: &quot;self&quot;
+    },
+    {
+        &quot;href&quot;: &quot;http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d/activate&quot;,
+        &quot;rel&quot;: &quot;activate&quot;
+    },
+    {
+        &quot;href&quot;: &quot;http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d/replay&quot;,
+        &quot;rel&quot;: &quot;replay&quot;
+    }
+]</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">get user query</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">http http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d
+
+{
+    &quot;activated&quot;: false,
+    &quot;changes&quot;: [
+        {
+            &quot;id&quot;: &quot;88f2829a-a1e7-4655-8d4d-83c812ab9a2d&quot;
+        }
+    ],
+    &quot;deactivated&quot;: false,
+    &quot;id&quot;: &quot;88f2829a-a1e7-4655-8d4d-83c812ab9a2d&quot;,
+    &quot;nickname&quot;: &quot;anonymous&quot;,
+    &quot;state&quot;: &quot;INITIALIZED&quot;
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">activate user command</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">http post http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d/activate
+# ...</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">replay user events query</div>
+<div class="content">
+<pre>http http http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d/replay
+
+[
+    {
+        "UserInitializedEvent": {
+            "id": "88f2829a-a1e7-4655-8d4d-83c812ab9a2d"
+        }
+    },
+    {
+        "UserActivatedEvent": {}
+    }
+]</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">get user again</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">http http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d
+
+{
+    &quot;activated&quot;: true,
+    &quot;changes&quot;: [
+        {
+            &quot;id&quot;: &quot;88f2829a-a1e7-4655-8d4d-83c812ab9a2d&quot;
+        },
+        {}
+    ],
+    &quot;deactivated&quot;: false,
+    &quot;id&quot;: &quot;88f2829a-a1e7-4655-8d4d-83c812ab9a2d&quot;,
+    &quot;nickname&quot;: &quot;anonymous&quot;,
+    &quot;state&quot;: &quot;ACTIVATED&quot;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>resources:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="https://www.youtube.com/watch?v=LvmPa7YKgqM">CQRS and Event Sourcing with Spring Cloud Stream talk</a></p>
+</li>
+<li>
+<p><a href="https://docs.spring.io/spring-hateoas/docs/current/reference/html/">Spring HATEAOS</a></p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 </div>
@@ -1081,7 +1213,7 @@ a6d3c929e35
 <h2 id="axon-framework">7. Axon Framework</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Axon banking app</p>
+<p><em>Axon banking app</em></p>
 </div>
 <div class="sect2">
 <h3 id="old">7.1. old</h3>
@@ -1106,15 +1238,9 @@ open http://localhost:8001 # browser 2</code></pre>
 </li>
 </ol>
 </div>
-<div class="listingblock">
-<div class="title">TODO - something wrong with persistence</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">Command 'daggerok.core.CreateComplaintCommand' resulted in ...EventStoreException(An event with identifier [...] could not be persisted)</code></pre>
+<div class="paragraph">
+<p><em>Axon complaints app</em></p>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="main-flow">7.3. main flow</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="bash">bash gradlew bootRun
@@ -1125,7 +1251,7 @@ http :8080/uuid...</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="links-5">7.4. links</h3>
+<h3 id="links-5">7.3. links</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1158,7 +1284,7 @@ http :8080/uuid...</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 0.4.1<br>
-Last updated 2017-10-08 21:19:35 EEST
+Last updated 2017-10-08 22:40:48 EEST
 </div>
 </div>
 </body>
