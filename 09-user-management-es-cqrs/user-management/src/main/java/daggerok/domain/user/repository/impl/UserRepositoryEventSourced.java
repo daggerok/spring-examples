@@ -38,11 +38,11 @@ public class UserRepositoryEventSourced implements UserRepository, RecreatableSt
   }
 
   @Override
-  public User findFromHistory(final UUID id, final Instant pointOfTime) {
+  public User findFromHistory(final UUID id, final Instant toPointOfTime) {
 
     val previous = db.getOrDefault(id, emptyList())
                      .stream()
-                     .filter(domainEvent -> domainEvent.at().compareTo(pointOfTime) <= 0)
+                     .filter(domainEvent -> domainEvent.at().compareTo(toPointOfTime) <= 0)
                      .collect(Collectors.toList());
 
     return User.recreatedFrom(id, previous);

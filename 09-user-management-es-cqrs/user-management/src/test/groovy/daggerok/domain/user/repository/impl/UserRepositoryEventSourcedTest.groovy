@@ -43,17 +43,17 @@ class UserRepositoryEventSourcedTest extends Specification {
       User user = new User(id)
       repository.save(user)
       Instant stop1 = Instant.now()
-      sleep(1500)
+      sleep(1)
     and:
       user.activate()
       repository.save(user)
       Instant stop2 = Instant.now()
-      sleep(1500)
+      sleep(1)
     and:
       user.changeNickname("max")
       repository.save(user)
       Instant stop3 = Instant.now()
-      sleep(1500)
+      sleep(1)
     and:
       user.changeNickname("fax")
       user.deactivate()
