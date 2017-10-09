@@ -25,12 +25,12 @@ public class User {
 
   public User(final UUID id) {
     this.id = id;
+    nickname = "anonymous";
+    state = INITIALIZED;
     on(new UserInitializedEvent(id, now()));
   }
 
   private User on(final UserInitializedEvent event) {
-    nickname = "anonymous";
-    state = INITIALIZED;
     changes.add(event);
     return this;
   }
@@ -70,7 +70,6 @@ public class User {
   public void deactivate() {
     if (isDeactivated())
       throw new IllegalStateException();
-    //this.state = DEACTIVATED;
     on(new UserDeactivatedEvent(now()));
   }
 
@@ -105,7 +104,7 @@ public class User {
 
   private User handleStateRecreationVavr(final DomainEvent domainEvent) {
     return io.vavr.API.Match(domainEvent).of(
-        io.vavr.API.Case(io.vavr.API.$(io.vavr.Predicates.instanceOf(UserInitializedEvent.class)), this::on),
+        io.vavr.API.Case(io.vavr.API.$(io.vavr.Predicates.instanceOf(UserInitializedEvent.class)), this),
         io.vavr.API.Case(io.vavr.API.$(io.vavr.Predicates.instanceOf(NicknameChangedEvent.class)), this::on),
         io.vavr.API.Case(io.vavr.API.$(io.vavr.Predicates.instanceOf(UserActivatedEvent.class)), this::on),
         io.vavr.API.Case(io.vavr.API.$(io.vavr.Predicates.instanceOf(UserDeactivatedEvent.class)), this::on)
@@ -120,7 +119,7 @@ public class User {
 
   private User handleStateRecreationJavaslang(final DomainEvent domainEvent) {
     return javaslang.API.Match(domainEvent).of(
-        javaslang.API.Case(javaslang.Predicates.instanceOf(UserInitializedEvent.class), this::on),
+        javaslang.API.Case(javaslang.Predicates.instanceOf(UserInitializedEvent.class), this),
         javaslang.API.Case(javaslang.Predicates.instanceOf(NicknameChangedEvent.class), this::on),
         javaslang.API.Case(javaslang.Predicates.instanceOf(UserActivatedEvent.class), this::on),
         javaslang.API.Case(javaslang.Predicates.instanceOf(UserDeactivatedEvent.class), this::on)

@@ -3,6 +3,9 @@ package daggerok.domain.user.repository.impl
 import daggerok.domain.user.User
 import daggerok.domain.user.repository.RecreatableStateFromSpecificTime
 import daggerok.domain.user.repository.UserRepository
+import daggerok.event.DomainEventPublisher
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification
 
 import java.time.Instant
@@ -11,9 +14,14 @@ import static daggerok.domain.user.UserStatus.ACTIVATED
 import static daggerok.domain.user.UserStatus.DEACTIVATED
 import static daggerok.domain.user.UserStatus.INITIALIZED
 
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class UserRepositoryEventSourcedTest extends Specification {
 
-  UserRepository repository = new UserRepositoryEventSourced(publisher)
+  @Autowired
+  DomainEventPublisher publisher
+
+  @Autowired
+  UserRepository repository// = new UserRepositoryEventSourced(publisher)
 
   def "should be able to save and load users"() {
     given:
@@ -35,6 +43,7 @@ class UserRepositoryEventSourcedTest extends Specification {
     and:
       userFromDb.nickname == "max"
   }
+
 
   def "should be able to save and load historical user state"() {
     given:
@@ -61,9 +70,9 @@ class UserRepositoryEventSourcedTest extends Specification {
     when:
       User latest = repository.find(id)
       RecreatableStateFromSpecificTime historicalRepository = repository as RecreatableStateFromSpecificTime
-      User v3 = historicalRepository.findFromHistory(id, stop3)
-      User v2 = historicalRepository.findFromHistory(id, stop2)
-      User v1 = historicalRepository.findFromHistory(id, stop1)
+      User v3 = historicalRepository.loadFromHistory(id, stop3)
+      User v2 = historicalRepository.loadFromHistory(id, stop2)
+      User v1 = historicalRepository.loadFromHistory(id, stop1)
     then:
       latest.state == DEACTIVATED
       latest.nickname == "fax"
@@ -74,7 +83,7 @@ class UserRepositoryEventSourcedTest extends Specification {
       v2.state == ACTIVATED
       v2.nickname == "anonymous"
     and:
-      v1.nickname == "anonymous"
       v1.state == INITIALIZED
+      v1.nickname == "anonymous"
   }
 }

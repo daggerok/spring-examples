@@ -6,6 +6,7 @@ import daggerok.domain.user.repository.UserRepository;
 import daggerok.event.DomainEvent;
 import daggerok.event.DomainEventPublisher;
 import lombok.val;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
@@ -37,9 +38,9 @@ public class UserRepositoryEventSourced implements UserRepository, RecreatableSt
 
     changes.addAll(newChanges);
     db.put(user.getId(), changes);
-    user.flush();
 
     newChanges.forEach(publisher::sendEvent);
+    user.flush();
   }
 
   @Override
@@ -49,7 +50,7 @@ public class UserRepositoryEventSourced implements UserRepository, RecreatableSt
   }
 
   @Override
-  public User findFromHistory(final UUID id, final Instant toPointOfTime) {
+  public User loadFromHistory(final UUID id, final Instant toPointOfTime) {
 
     val previous = db.getOrDefault(id, emptyList())
                      .stream()

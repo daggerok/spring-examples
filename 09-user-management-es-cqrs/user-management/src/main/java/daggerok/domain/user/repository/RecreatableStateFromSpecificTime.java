@@ -9,5 +9,5 @@ import java.util.UUID;
 @NoRepositoryBean
 public interface RecreatableStateFromSpecificTime {
 
-  User findFromHistory(final UUID id, final Instant fromTime);
+  User loadFromHistory(final UUID id, final Instant fromTime);
 }
