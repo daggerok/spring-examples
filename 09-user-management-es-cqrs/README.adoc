@@ -17,49 +17,80 @@ http post :8080/
 
 [
     {
-        "href": "http://localhost:8080/667acc1e-fbe5-42fe-9826-de5ebddc7540",
+        "href": "http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d",
         "rel": "self"
     },
     {
-        "href": "http://localhost:8080/667acc1e-fbe5-42fe-9826-de5ebddc7540/replay",
+        "href": "http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d/activate",
+        "rel": "activate"
+    },
+    {
+        "href": "http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d/replay",
         "rel": "replay"
     }
 ]
 ----
 
 .get user query
+[source,bash]
 ----
-http http://localhost:8080/667acc1e-fbe5-42fe-9826-de5ebddc7540
+http http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d
 
 {
     "activated": false,
     "changes": [
         {
-            "id": "667acc1e-fbe5-42fe-9826-de5ebddc7540"
-        },
-        {
-            "id": "667acc1e-fbe5-42fe-9826-de5ebddc7540"
+            "id": "88f2829a-a1e7-4655-8d4d-83c812ab9a2d"
         }
     ],
     "deactivated": false,
-    "id": "667acc1e-fbe5-42fe-9826-de5ebddc7540",
+    "id": "88f2829a-a1e7-4655-8d4d-83c812ab9a2d",
     "nickname": "anonymous",
     "state": "INITIALIZED"
 }
 ----
 
-.get user events query
+.activate user command
+[source,bash]
 ----
-http http://localhost:8080/667acc1e-fbe5-42fe-9826-de5ebddc7540/replay
+http post http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d/activate
+# ...
+----
+
+.replay user events query
+----
+http http http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d/replay
 
 [
     {
-        "id": "667acc1e-fbe5-42fe-9826-de5ebddc7540"
+        "UserInitializedEvent": {
+            "id": "88f2829a-a1e7-4655-8d4d-83c812ab9a2d"
+        }
     },
     {
-        "id": "667acc1e-fbe5-42fe-9826-de5ebddc7540"
+        "UserActivatedEvent": {}
     }
 ]
+----
+
+.get user again
+[source,bash]
+----
+http http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d
+
+{
+    "activated": true,
+    "changes": [
+        {
+            "id": "88f2829a-a1e7-4655-8d4d-83c812ab9a2d"
+        },
+        {}
+    ],
+    "deactivated": false,
+    "id": "88f2829a-a1e7-4655-8d4d-83c812ab9a2d",
+    "nickname": "anonymous",
+    "state": "ACTIVATED"
+}
 ----
 
 resources:
