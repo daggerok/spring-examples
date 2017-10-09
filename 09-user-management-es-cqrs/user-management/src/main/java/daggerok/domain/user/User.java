@@ -1,12 +1,8 @@
 package daggerok.domain.user;
 
 import com.google.common.collect.ImmutableList;
-import daggerok.domain.user.event.DomainEvent;
-import daggerok.domain.user.event.NicknameChangedEvent;
-import daggerok.domain.user.event.UserActivatedEvent;
-import daggerok.domain.user.event.UserDeactivatedEvent;
+import daggerok.domain.user.event.*;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.val;
 import org.springframework.util.CollectionUtils;
@@ -20,13 +16,24 @@ import static java.time.Instant.now;
 import static lombok.AccessLevel.PRIVATE;
 
 @Data
-@RequiredArgsConstructor
 @FieldDefaults(level = PRIVATE)
 public class User {
 
   final UUID id;
-  UserStatus state = INITIALIZED;
-  String nickname = "";
+  String nickname;
+  UserStatus state;
+
+  public User(final UUID id) {
+    this.id = id;
+    on(new UserInitializedEvent(id, now()));
+  }
+
+  private User on(final UserInitializedEvent event) {
+    nickname = "anonymous";
+    state = INITIALIZED;
+    changes.add(event);
+    return this;
+  }
 
   List<DomainEvent> changes = new ArrayList<>();
 
@@ -81,7 +88,7 @@ public class User {
     return DEACTIVATED == this.state;
   }
 
-  String getNickname() {
+  public String getNickname() {
     return this.nickname;
   }
 
@@ -98,6 +105,7 @@ public class User {
 
   private User handleStateRecreationVavr(final DomainEvent domainEvent) {
     return io.vavr.API.Match(domainEvent).of(
+        io.vavr.API.Case(io.vavr.API.$(io.vavr.Predicates.instanceOf(UserInitializedEvent.class)), this::on),
         io.vavr.API.Case(io.vavr.API.$(io.vavr.Predicates.instanceOf(NicknameChangedEvent.class)), this::on),
         io.vavr.API.Case(io.vavr.API.$(io.vavr.Predicates.instanceOf(UserActivatedEvent.class)), this::on),
         io.vavr.API.Case(io.vavr.API.$(io.vavr.Predicates.instanceOf(UserDeactivatedEvent.class)), this::on)
@@ -112,6 +120,7 @@ public class User {
 
   private User handleStateRecreationJavaslang(final DomainEvent domainEvent) {
     return javaslang.API.Match(domainEvent).of(
+        javaslang.API.Case(javaslang.Predicates.instanceOf(UserInitializedEvent.class), this::on),
         javaslang.API.Case(javaslang.Predicates.instanceOf(NicknameChangedEvent.class), this::on),
         javaslang.API.Case(javaslang.Predicates.instanceOf(UserActivatedEvent.class), this::on),
         javaslang.API.Case(javaslang.Predicates.instanceOf(UserDeactivatedEvent.class), this::on)
