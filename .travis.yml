@@ -8,7 +8,7 @@ jdk:
 
 install: true
 before_install:
-  - sudo apt update
+  #- sudo apt update
 
   # frontend tests
   - export CHROME_BIN=/usr/bin/google-chrome
