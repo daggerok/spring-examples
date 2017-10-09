@@ -10,4 +10,61 @@ bash gradlew clean build
 bash gradlew bootRun
 ----
 
+.create user command
+[source,bash]
+----
+http post :8080/
+
+[
+    {
+        "href": "http://localhost:8080/667acc1e-fbe5-42fe-9826-de5ebddc7540",
+        "rel": "self"
+    },
+    {
+        "href": "http://localhost:8080/667acc1e-fbe5-42fe-9826-de5ebddc7540/replay",
+        "rel": "replay"
+    }
+]
+----
+
+.get user query
+----
+http http://localhost:8080/667acc1e-fbe5-42fe-9826-de5ebddc7540
+
+{
+    "activated": false,
+    "changes": [
+        {
+            "id": "667acc1e-fbe5-42fe-9826-de5ebddc7540"
+        },
+        {
+            "id": "667acc1e-fbe5-42fe-9826-de5ebddc7540"
+        }
+    ],
+    "deactivated": false,
+    "id": "667acc1e-fbe5-42fe-9826-de5ebddc7540",
+    "nickname": "anonymous",
+    "state": "INITIALIZED"
+}
+----
+
+.get user events query
+----
+http http://localhost:8080/667acc1e-fbe5-42fe-9826-de5ebddc7540/replay
+
+[
+    {
+        "id": "667acc1e-fbe5-42fe-9826-de5ebddc7540"
+    },
+    {
+        "id": "667acc1e-fbe5-42fe-9826-de5ebddc7540"
+    }
+]
+----
+
+resources:
+
+. link:https://www.youtube.com/watch?v=LvmPa7YKgqM[CQRS and Event Sourcing with Spring Cloud Stream talk]
+. link:https://docs.spring.io/spring-hateoas/docs/current/reference/html/[Spring HATEAOS]
+
 //end::content02[]

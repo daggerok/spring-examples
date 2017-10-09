@@ -13,7 +13,7 @@ import static daggerok.domain.user.UserStatus.INITIALIZED
 
 class UserRepositoryEventSourcedTest extends Specification {
 
-  UserRepository repository = new UserRepositoryEventSourced()
+  UserRepository repository = new UserRepositoryEventSourced(publisher)
 
   def "should be able to save and load users"() {
     given:

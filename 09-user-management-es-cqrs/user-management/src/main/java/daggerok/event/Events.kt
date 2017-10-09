@@ -1,4 +1,4 @@
-package daggerok.domain.user.event
+package daggerok.event
 
 import java.time.Instant
 import java.util.*

@@ -1,10 +1,12 @@
 package daggerok.domain.user.repository.impl;
 
 import daggerok.domain.user.User;
-import daggerok.domain.user.event.DomainEvent;
 import daggerok.domain.user.repository.RecreatableStateFromSpecificTime;
 import daggerok.domain.user.repository.UserRepository;
+import daggerok.event.DomainEvent;
+import daggerok.event.DomainEventPublisher;
 import lombok.val;
+import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -16,9 +18,16 @@ import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
 
+@Repository
 public class UserRepositoryEventSourced implements UserRepository, RecreatableStateFromSpecificTime {
 
   final Map<UUID, List<DomainEvent>> db = new ConcurrentHashMap<>();
+
+  final DomainEventPublisher publisher;
+
+  public UserRepositoryEventSourced(final DomainEventPublisher publisher) {
+    this.publisher = publisher;
+  }
 
   @Override
   public void save(final User user) {
@@ -29,6 +38,8 @@ public class UserRepositoryEventSourced implements UserRepository, RecreatableSt
     changes.addAll(newChanges);
     db.put(user.getId(), changes);
     user.flush();
+
+    newChanges.forEach(publisher::sendEvent);
   }
 
   @Override

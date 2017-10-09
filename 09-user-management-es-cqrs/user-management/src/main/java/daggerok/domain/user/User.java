@@ -1,7 +1,7 @@
 package daggerok.domain.user;
 
 import com.google.common.collect.ImmutableList;
-import daggerok.domain.user.event.*;
+import daggerok.event.*;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 import lombok.val;

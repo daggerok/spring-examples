@@ -95,13 +95,13 @@ subprojects { subproject ->
   }
 
   springBoot.executable = true
-/*
+///*
   [test, build, bootRun].each { t ->
     t.dependsOn assemble, ":docker:composeUp"
     t.shouldRunAfter assemble, ":docker:composeUp"
     t.finalizedBy ":docker:composeDown"
   }
-*/
+//*/
 }
 
 def isDocker(Project p) {
