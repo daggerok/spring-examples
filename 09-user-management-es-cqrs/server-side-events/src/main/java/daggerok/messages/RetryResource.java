@@ -21,8 +21,7 @@ public class RetryResource {
   @SneakyThrows
   @GetMapping(produces = TEXT_EVENT_STREAM_VALUE)
   public SseEmitter createSubscription() {
-    val sseEmitter = messageService.create();
-    return sseEmitter;
+    return messageService.create();
   }
 
   @SneakyThrows

@@ -26,11 +26,12 @@ import static java.util.Optional.ofNullable;
 @RequiredArgsConstructor
 public class MessageService {
 
-  public static final List<String> ignores = asList(
+  static final List<String> ignores = asList(
       "ResponseBodyEmitter is already set complete",
       "Broken pipe"
   );
   static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-s-SSS");
+
   @Qualifier("sseEmitterRepository")
   final Map<String, SseEmitter> sseEmitterRepository;
 

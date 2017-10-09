@@ -1,5 +1,8 @@
-server:
-  port: 8001
 spring:
-  mustache:
-    prefix: classpath:/static/
+  profiles:
+    include:
+      - mq-props
+      - mq
+      - mustache
+      - server
+      - cloud-stream

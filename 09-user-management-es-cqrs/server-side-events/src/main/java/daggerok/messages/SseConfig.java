@@ -22,27 +22,9 @@ public class SseConfig {
 
   @Bean
   public ObjectMapper objectMapper() {
-
     val objectMapper = new ObjectMapper();
-
     objectMapper.setSerializationInclusion(NON_NULL);
     objectMapper.setSerializationInclusion(NON_EMPTY);
-/*
-    objectMapper.enable(
-        WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS,
-        WRITE_DATE_KEYS_AS_TIMESTAMPS,
-        WRITE_DATES_AS_TIMESTAMPS,
-        WRITE_DATES_WITH_ZONE_ID,
-        WRITE_DURATIONS_AS_TIMESTAMPS
-    );
-
-    objectMapper.enable(SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS);
-    objectMapper.enable(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS);
-    objectMapper.enable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-    objectMapper.enable(SerializationFeature.WRITE_DATES_WITH_ZONE_ID);
-    objectMapper.enable(SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS);
-    objectMapper.enable(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS);
-*/
     return objectMapper;
   }
 }

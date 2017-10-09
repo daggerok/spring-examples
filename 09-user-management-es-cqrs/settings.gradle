@@ -1,3 +1,3 @@
-//include "server-side-events"
+include "server-side-events"
 include "docker"
 include "user-management"

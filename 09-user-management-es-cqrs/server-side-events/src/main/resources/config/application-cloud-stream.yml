@@ -2,6 +2,6 @@ spring:
   cloud:
     stream:
       bindings:
-        output:
+        input:
           content-type: application/json
           destination: users
