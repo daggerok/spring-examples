@@ -1,0 +1,11 @@
+= jax-rs
+
+//tag::content[]
+
+----
+./gradlew bootRun
+http :8080
+http :8080/1
+----
+
+//end::content[]

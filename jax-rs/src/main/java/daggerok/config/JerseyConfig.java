@@ -1,5 +1,6 @@
 package daggerok.config;
 
+import daggerok.GlobalErrorHandler;
 import daggerok.domain.User;
 import daggerok.domain.UserRepository;
 import daggerok.domain.UserResource;
@@ -30,9 +31,11 @@ public class JerseyConfig {
   }
 
   @Bean
-  public ResourceConfig resourceConfig(final UserResource userResource) {
+  public ResourceConfig resourceConfig(final GlobalErrorHandler globalErrorHandler,
+                                       final UserResource userResource) {
     val rc = new ResourceConfig();
     rc.register(userResource);
+    rc.register(globalErrorHandler);
     return rc;
   }
 }
