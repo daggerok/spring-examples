@@ -1,4 +1,4 @@
-package daggerok.config;
+package daggerok.config.security.spring;
 
 import lombok.val;
 import org.springframework.context.annotation.Bean;

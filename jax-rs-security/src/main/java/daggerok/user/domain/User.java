@@ -1,4 +1,4 @@
-package daggerok.domain;
+package daggerok.user.domain;
 
 import lombok.*;
 import lombok.experimental.Accessors;

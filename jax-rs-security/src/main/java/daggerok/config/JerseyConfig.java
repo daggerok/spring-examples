@@ -1,8 +1,8 @@
 package daggerok.config;
 
-import daggerok.domain.User;
-import daggerok.domain.UserRepository;
-import daggerok.domain.UserResource;
+import daggerok.user.domain.User;
+import daggerok.user.data.UserRepository;
+import daggerok.user.rest.UserResource;
 import daggerok.error.GlobalErrorHandler;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;

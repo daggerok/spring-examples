@@ -7,12 +7,17 @@
 ----
 bash gradlew bootRun
 
-# secured rest
-http --auth user:change-me :8080/
-
 # secured actuatoe endpoints
 http --auth user:change-me :8080/applicaion/env
 http --auth admin:change-me :8080/applicaion/env
+
+# secured rest
+http --auth user:change-me :8080/1
+http --auth admin:change-me :8080/2
+
+# check logs for
+# ... user was here
+# ... admin was here
 ----
 
 //end::content[]
