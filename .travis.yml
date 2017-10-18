@@ -33,6 +33,7 @@ script:
   - export ROOT=$PWD
   - >
     for path in \
+      jax-rs \
       09-user-management-es-cqrs \
       08-axon-complains \
       07-axon-banking \

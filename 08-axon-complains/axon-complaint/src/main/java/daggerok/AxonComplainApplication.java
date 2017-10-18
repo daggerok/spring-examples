@@ -1,16 +1,16 @@
 package daggerok;
 
-import daggerok.data.ComplaintQueryObject;
-import daggerok.data.ComplaintQueryObjectRepository;
+//import daggerok.data.ComplaintQueryObject;
+//import daggerok.data.ComplaintQueryObjectRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.spring.config.EnableAxon;
-import org.springframework.boot.CommandLineRunner;
+//import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Bean;
 
-import java.util.UUID;
-import java.util.stream.IntStream;
+//import java.util.UUID;
+//import java.util.stream.IntStream;
 
 @Slf4j
 @EnableAxon

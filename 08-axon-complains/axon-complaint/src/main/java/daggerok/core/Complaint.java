@@ -1,17 +1,17 @@
 package daggerok.core;
 
-import daggerok.data.ComplaintQueryObject;
-import daggerok.data.ComplaintQueryObjectRepository;
+//import daggerok.data.ComplaintQueryObject;
+//import daggerok.data.ComplaintQueryObjectRepository;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
+//import lombok.val;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.commandhandling.model.AggregateIdentifier;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.spring.stereotype.Aggregate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
