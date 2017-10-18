@@ -1,4 +1,5 @@
-= jax-rs
+= JAX-RS (Jersey) image:https://travis-ci.org/daggerok/spring-examples.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/spring-examples"]
+
 
 //tag::content[]
 
@@ -6,7 +7,7 @@
 ----
 bash gradlew bootRun
 
-#
+# rest
 http :8080
 http :8080/1
 

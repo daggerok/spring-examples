@@ -1,0 +1,15 @@
+= JAX-RS Security image:https://travis-ci.org/daggerok/spring-examples.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/spring-examples"]
+
+
+//tag::content[]
+
+[source,bash]
+----
+bash gradlew bootRun
+
+# secured rest
+http --auth admin:change-me :8080/
+
+----
+
+//end::content[]
