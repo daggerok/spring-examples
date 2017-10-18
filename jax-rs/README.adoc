@@ -1,0 +1,21 @@
+= jax-rs
+
+//tag::content[]
+
+[source,bash]
+----
+bash gradlew bootRun
+
+#
+http :8080
+http :8080/1
+
+# global error handling
+http :8080/4
+
+# actuator
+http :8080/application
+http :8080/application/status
+----
+
+//end::content[]
