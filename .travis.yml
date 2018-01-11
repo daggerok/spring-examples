@@ -3,6 +3,10 @@ group: travis_lts
 
 service: docker
 
+env:
+  global:
+    TERM=dumb
+
 language: java
 jdk:
   - openjdk8
