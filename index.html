@@ -540,7 +540,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">Maksim Kostromin</span><br>
 <span id="email" class="email"><a href="mailto:daggerok@gmail.com">daggerok@gmail.com</a></span><br>
 <span id="revnumber">version 0.4.1,</span>
-<span id="revdate">2017-10-08 22:40:48 EEST</span>
+<span id="revdate">2017-10-18 21:49:02 EEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -588,8 +588,9 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#links-5">7.3. links</a></li>
 </ul>
 </li>
-<li><a href="#links-6">8. links</a></li>
-<li><a href="#enjoy">9. Enjoy! :)</a></li>
+<li><a href="#jersey-jax-rs">8. Jersey JAX-RS</a></li>
+<li><a href="#links-6">9. links</a></li>
+<li><a href="#enjoy">10. Enjoy! :)</a></li>
 </ul>
 </div>
 </div>
@@ -1106,8 +1107,12 @@ a6d3c929e35
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="bash">bash gradlew clean build
-bash gradlew bootRun</code></pre>
+bash gradlew bootRun --parallel
+open http://localhost:8001</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Flow still buggy, but i&#8217;m too lazy to fix&#8230;&#8203;</p>
 </div>
 <div class="listingblock">
 <div class="title">create user command</div>
@@ -1116,16 +1121,12 @@ bash gradlew bootRun</code></pre>
 
 [
     {
-        &quot;href&quot;: &quot;http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d&quot;,
+        &quot;href&quot;: &quot;http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3&quot;,
         &quot;rel&quot;: &quot;self&quot;
     },
     {
-        &quot;href&quot;: &quot;http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d/activate&quot;,
+        &quot;href&quot;: &quot;http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3/activate&quot;,
         &quot;rel&quot;: &quot;activate&quot;
-    },
-    {
-        &quot;href&quot;: &quot;http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d/replay&quot;,
-        &quot;rel&quot;: &quot;replay&quot;
     }
 ]</code></pre>
 </div>
@@ -1133,17 +1134,17 @@ bash gradlew bootRun</code></pre>
 <div class="listingblock">
 <div class="title">get user query</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">http http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d
+<pre class="CodeRay highlight"><code data-lang="bash">http http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3
 
 {
     &quot;activated&quot;: false,
     &quot;changes&quot;: [
         {
-            &quot;id&quot;: &quot;88f2829a-a1e7-4655-8d4d-83c812ab9a2d&quot;
+            &quot;id&quot;: &quot;47401f30-b3f1-4204-9ea4-bdb8c394d0b3&quot;
         }
     ],
     &quot;deactivated&quot;: false,
-    &quot;id&quot;: &quot;88f2829a-a1e7-4655-8d4d-83c812ab9a2d&quot;,
+    &quot;id&quot;: &quot;47401f30-b3f1-4204-9ea4-bdb8c394d0b3&quot;,
     &quot;nickname&quot;: &quot;anonymous&quot;,
     &quot;state&quot;: &quot;INITIALIZED&quot;
 }</code></pre>
@@ -1152,45 +1153,91 @@ bash gradlew bootRun</code></pre>
 <div class="listingblock">
 <div class="title">activate user command</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">http post http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d/activate
-# ...</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">replay user events query</div>
-<div class="content">
-<pre>http http http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d/replay
+<pre class="CodeRay highlight"><code data-lang="bash">http post http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3/activate
 
 [
     {
-        "UserInitializedEvent": {
-            "id": "88f2829a-a1e7-4655-8d4d-83c812ab9a2d"
-        }
+        &quot;href&quot;: &quot;http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3&quot;,
+        &quot;rel&quot;: &quot;self&quot;
     },
     {
-        "UserActivatedEvent": {}
+        &quot;href&quot;: &quot;http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3/change-nickname/newNickname&quot;,
+        &quot;rel&quot;: &quot;change-nickname&quot;
+    }
+]</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">change user nickname command</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">http post http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3/change-nickname/max
+
+[
+    {
+        &quot;href&quot;: &quot;http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3&quot;,
+        &quot;rel&quot;: &quot;self&quot;
+    },
+    {
+        &quot;href&quot;: &quot;http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3/deactivate&quot;,
+        &quot;rel&quot;: &quot;deactivate&quot;
+    }
+]</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">deactivate user events command</div>
+<div class="content">
+<pre>http post http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3/deactivate
+
+[
+    {
+        "href": "http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3",
+        "rel": "self"
+    },
+    {
+        "href": "http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3/replay",
+        "rel": "replay"
     }
 ]</pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">get user again</div>
+<div class="title">replay user events query</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">http http://localhost:8080/88f2829a-a1e7-4655-8d4d-83c812ab9a2d
+<pre>http http://localhost:8080/47401f30-b3f1-4204-9ea4-bdb8c394d0b3/replay
 
-{
-    &quot;activated&quot;: true,
-    &quot;changes&quot;: [
-        {
-            &quot;id&quot;: &quot;88f2829a-a1e7-4655-8d4d-83c812ab9a2d&quot;
-        },
-        {}
-    ],
-    &quot;deactivated&quot;: false,
-    &quot;id&quot;: &quot;88f2829a-a1e7-4655-8d4d-83c812ab9a2d&quot;,
-    &quot;nickname&quot;: &quot;anonymous&quot;,
-    &quot;state&quot;: &quot;ACTIVATED&quot;
-}</code></pre>
+[
+    {
+        "UserInitializedEvent": {
+            "id": "47401f30-b3f1-4204-9ea4-bdb8c394d0b3"
+        }
+    },
+    {
+        "UserActivatedEvent": {}
+    },
+    {
+        "UserActivatedEvent": {}
+    },
+    {
+        "NicknameChangedEvent": {
+            "nickname": "max"
+        }
+    },
+    {
+        "UserActivatedEvent": {}
+    },
+    {
+        "UserActivatedEvent": {}
+    },
+    {
+        "NicknameChangedEvent": {
+            "nickname": "max"
+        }
+    },
+    {
+        "UserDeactivatedEvent": {}
+    }
+]</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1263,7 +1310,45 @@ http :8080/uuid...</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="links-6">8. links</h2>
+<h2 id="jersey-jax-rs">8. Jersey JAX-RS</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">bash gradlew bootRun
+
+# rest
+http :8080
+http :8080/1
+
+# global error handling
+http :8080/4
+
+# actuator
+http :8080/application
+http :8080/application/status</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">bash gradlew bootRun
+
+# secured actuatoe endpoints
+http --auth user:change-me :8080/applicaion/env
+http --auth admin:change-me :8080/applicaion/env
+
+# secured rest
+http --auth user:change-me :8080/1
+http --auth admin:change-me :8080/2
+
+# check logs for
+# ... user was here
+# ... admin was here</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="links-6">9. links</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -1275,7 +1360,7 @@ http :8080/uuid...</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="enjoy">9. Enjoy! :)</h2>
+<h2 id="enjoy">10. Enjoy! :)</h2>
 <div class="sectionbody">
 
 </div>
@@ -1284,7 +1369,7 @@ http :8080/uuid...</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 0.4.1<br>
-Last updated 2017-10-08 22:40:48 EEST
+Last updated 2017-10-18 21:49:02 EEST
 </div>
 </div>
 </body>
