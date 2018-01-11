@@ -1,5 +1,7 @@
-group: edge
-dist: trusty
+sudo: required
+group: travis_lts
+
+service: docker
 
 language: java
 jdk:
@@ -8,7 +10,10 @@ jdk:
 
 install: true
 before_install:
-  #- sudo apt update
+  # docker-compose, curl, jq, httpie
+  - sudo apt update -y || true
+  - sudo apt -y install curl jq libxml2-utils python-pip
+  - sudo pip install docker-compose httpie
 
   # frontend tests
   - export CHROME_BIN=/usr/bin/google-chrome
@@ -18,15 +23,9 @@ before_install:
   - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   - sudo dpkg -i google-chrome*.deb
 
-  # install docker-compose
-  - sudo apt install -y python-pip curl jq libxml2-utils
-  - sudo pip install docker-compose httpie
-  - sudo usermod -aG docker $(whoami)
-
-  # kill whatever punning on postgres / rabbitmq port
-  - sudo kill $(sudo lsof -t -i:5432) | true
-  - sudo kill $(sudo lsof -t -i:5672) | true
-  - sudo kill $(sudo lsof -t -i:27017) | true
+  # kill ports
+  - source <(curl -fsSL https://raw.github.com/daggerok/bash-functions/master/main.bash)
+  - stop_any 5672 5432 27017 9200 9300 5601 8001 8002 8080 80
 
 script:
   - bash gradlew clean build
