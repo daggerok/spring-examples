@@ -1,0 +1,59 @@
+buildscript {
+  ext {
+    kotlinVersion = "1.2.10"
+    springBootVersion = "1.5.9.RELEASE"
+  }
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+    classpath("org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion")
+  }
+}
+
+apply plugin: "idea"
+apply plugin: "java"
+apply plugin: "kotlin"
+apply plugin: "eclipse"
+apply plugin: "kotlin-spring"
+apply plugin: "org.springframework.boot"
+
+group = "daggerok"
+version = "0.0.1"
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+
+compileKotlin {
+  kotlinOptions.jvmTarget = project.targetCompatibility
+}
+
+compileTestKotlin {
+  kotlinOptions.jvmTarget = project.targetCompatibility
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile("org.axonframework:axon-spring-boot-starter:3.0.6")
+  compile("org.springframework.boot:spring-boot-starter-web")
+  compile("org.springframework.boot:spring-boot-starter-data-jpa")
+  compile("org.springframework.boot:spring-boot-starter-data-rest")
+  compile("org.springframework.boot:spring-boot-starter-actuator")
+  compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+  compile("com.fasterxml.jackson.datatype:jackson-datatype-jdk8")
+  compile("com.fasterxml.jackson.core:jackson-databind")
+  compile("org.hibernate:hibernate-java8")
+  compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
+  compile("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
+  compile("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0")
+  compileOnly("org.projectlombok:lombok")
+  runtime("org.springframework.boot:spring-boot-devtools")
+  // // h2-console:
+  //runtime("com.h2database:h2")
+  compile("com.h2database:h2")
+}
+
+defaultTasks "clean", "build"

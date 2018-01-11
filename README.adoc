@@ -8,5 +8,6 @@ This repository is contains some spring / spring-boot playground projects
 . link:04-wro4j/[wro4j assets optimization]
 . link:07-axon-banking/[bank - event sourcing with axon]
 . link:08-axon-complains/[complains - event sourcing with axon]
+. link:axon-app/[Axon API]
 . link:jax-rs/[Jersey]
 . link:jax-rs-security/[JAX-RS Security]

@@ -37,6 +37,7 @@ include::../../09-user-management-es-cqrs/README.adoc[tags=content]
 == Axon Framework
 include::../../07-axon-banking/README.adoc[tags=content]
 include::../../08-axon-complains/README.adoc[tags=content]
+include::../../axon-app/README.adoc[tags=content]
 
 == Jersey JAX-RS
 include::../../jax-rs/README.adoc[tags=content]

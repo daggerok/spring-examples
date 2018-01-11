@@ -1,9 +1,7 @@
 !.gotkeep
-
 .DS_Store
 .gradle/
-!gradle-wrapper.jar
-
+target/
 build/
 out/
 **/src/main/resources/public/

@@ -1,0 +1,24 @@
+= axon-api image:https://travis-ci.org/daggerok/spring-examples.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/spring-examples"]
+
+//tag::content[]
+
+.run abd test
+----
+./mvnw clean package spring-boot:run
+
+http post :8080/api/v1/orders
+# output:
+# Location: http://localhost:8080/api/v1/orders/$ID
+
+http put :8080/api/v1/orders/$ID/add    k1=2 k3=4
+http put :8080/api/v1/orders/$ID/add    k1=1 k3=1
+http put :8080/api/v1/orders/$ID/remove k1=1 k3=2
+
+http delete :8080/api/v1/orders/$ID
+http post :8080/api/v1/orders
+http post :8080/api/v1/orders
+
+http :8080/order-query
+----
+
+//end::content[]
