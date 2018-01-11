@@ -11,3 +11,4 @@ This repository is contains some spring / spring-boot playground projects
 . link:axon-app/[Axon API]
 . link:jax-rs/[Jersey]
 . link:jax-rs-security/[JAX-RS Security]
+. link:./axon-app/[Axon app]

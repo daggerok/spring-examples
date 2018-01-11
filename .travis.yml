@@ -38,14 +38,15 @@ script:
   # axon-app
   - cd ${ROOT}/axon-app
   # gradle
-  - bash mvnw clean spring-boot:run &
+  - bash gradlew clean build
+  - java -jar ./build/libs/*.jar &
   - wait_for 8080
   - http post :8080/api/v1/orders
   - http post :8080/api/v1/orders
   - http get :8080/order-query
   - stop_any 8080
   # maven docker
-  - bash gradlew
+  - bash mvnw
   - docker-compose build --force-rm --no-cache --pull
   - docker-compose up --force-recreate --remove-orphans &
   - sleep 30
