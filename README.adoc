@@ -12,3 +12,5 @@ This repository is contains some spring / spring-boot playground projects
 . link:jax-rs/[Jersey]
 . link:jax-rs-security/[JAX-RS Security]
 . link:./axon-app/[Axon app]
+. link:https://github.com/daggerok/csrf-spring-webflux-mustache/[Webflux, Reactive security, CSRF, etc..]
+
