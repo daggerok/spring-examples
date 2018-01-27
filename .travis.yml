@@ -41,8 +41,9 @@ script:
 - http :8080/upper-cased message=hi!
 - http :8080/url-encoded message=hi!
 - http :8080/jsoned message=hi!
-- http :8000/map nif=naf nuf=poh
 - http :8000 ololo=trololo
+- http :8000/map nif=naf nuf=poh
+- http :8000/split-aggregate kk=vv k1=v1 k=v
 - stop_any 8080 8000
 
 # axon-app
