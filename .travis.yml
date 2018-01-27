@@ -41,6 +41,8 @@ script:
 - http :8080/upper-cased message=hi!
 - http :8080/url-encoded message=hi!
 - http :8080/jsoned message=hi!
+- http :8000/map nif=naf nuf=poh
+- http :8000 ololo=trololo
 - stop_any 8080 8000
 
 # axon-app
@@ -52,8 +54,6 @@ script:
 - http post :8080/api/v1/orders
 - http post :8080/api/v1/orders
 - http get :8080/order-query
-- http get :8000/map nif=naf nuf=poh
-- http get :8000 ololo=trololo
 - stop_any 8080
 # maven docker
 - bash mvnw
