@@ -16,7 +16,7 @@ install: true
 before_install:
   # docker-compose, curl, jq, httpie
   - sudo apt update -y || true
-  - sudo apt -y install curl jq libxml2-utils python-pip
+  - sudo apt -y install docker-ce curl jq libxml2-utils python-pip
   - sudo pip install docker-compose httpie
 
   # frontend tests
@@ -34,6 +34,13 @@ before_install:
 script:
   - bash gradlew clean build
   - export ROOT=$PWD
+
+  - cd ${ROOT}/http-integration-java-dsl
+  - bash gradlew
+  - java -jar build/libs/*.jar &
+  - wait_for 8080
+  - http :8080 key=value1 key=value2 k=v
+  - stop_any 8080
 
   # axon-app
   - cd ${ROOT}/axon-app
@@ -57,6 +64,7 @@ script:
 
   - >
     for path in \
+      http-integration-java-dsl \
       jax-rs-security \
       jax-rs \
       09-user-management-es-cqrs \
