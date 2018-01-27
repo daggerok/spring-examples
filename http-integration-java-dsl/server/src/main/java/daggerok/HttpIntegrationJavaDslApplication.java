@@ -3,9 +3,6 @@ package daggerok;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.FormHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.http.Http;
@@ -16,8 +13,6 @@ import java.util.Map;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonMap;
 import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VALUE;
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
 @SpringBootApplication
 public class HttpIntegrationJavaDslApplication {
@@ -46,21 +41,24 @@ public class HttpIntegrationJavaDslApplication {
    */
 
   @Bean
-  IntegrationFlow flow() {
+  IntegrationFlow mapperFlow() {
 
-    return IntegrationFlows.from(Http.inboundGateway("/")
-//                                     .messageConverters(
-//                                         new FormHttpMessageConverter(),
-//                                         new MappingJackson2HttpMessageConverter()
-//                                     )
-                                     .requestMapping(m -> m.methods(POST)
-//                                                           .consumes(APPLICATION_FORM_URLENCODED_VALUE)
-                                     )
+    return IntegrationFlows.from(Http.inboundGateway("/map")
+                                     .requestMapping(m -> m.methods(POST))
+                                     .requestPayloadType(Map.class))
+                           .<Map, List>transform(m -> asList(
+                               singletonMap("keys", m.keySet()),
+                               singletonMap("values", m.values())
+                           ))
+                           .get();
+  }
+
+  @Bean
+  IntegrationFlow upperFlow() {
+
+    return IntegrationFlows.from(Http.inboundGateway("/**")
+                                     .requestMapping(m -> m.methods(POST))
                                      .requestPayloadType(String.class))
-//                           .<Map, List>transform(m -> asList(
-//                               singletonMap("keys", m.keySet()),
-//                               singletonMap("values", m.values())
-//                           ))
                            .<String, String>transform(String::toUpperCase)
                            .get();
   }
