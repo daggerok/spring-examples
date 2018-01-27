@@ -16,27 +16,27 @@ ifndef::sourcedir[:sourcedir: ../../..]
 include::includes/Introduction.adoc[]
 
 == spring-boot under the hood
-include::../../01-spring-boot-under-the-hood/README.adoc[tags=content]
+include::../../spring-boot-under-the-hood/README.adoc[tags=content]
 
 == server-side events / sse emitter
-include::../../02-sse-emitter/README.adoc[tags=content]
+include::../../sse-emitter/README.adoc[tags=content]
 
 == retry
-include::../../03-retry/README.adoc[tags=content]
+include::../../retry/README.adoc[tags=content]
 
 == frontend web resources optimization
-include::../../04-frontend-reources/README.adoc[tags=content]
+include::../../frontend-reources/README.adoc[tags=content]
 
 == testing
-include::../../05-testing/README.adoc[tags=content]
+include::../../testing/README.adoc[tags=content]
 
 == CQRS and Event-Sourcing
-include::../../06-cqrs-and-eventsourcing/README.adoc[tags=content]
-include::../../09-user-management-es-cqrs/README.adoc[tags=content]
+include::../../cqrs-and-eventsourcing/README.adoc[tags=content]
+include::../../user-management-es-cqrs/README.adoc[tags=content]
 
 == Axon Framework
-include::../../07-axon-banking/README.adoc[tags=content]
-include::../../08-axon-complains/README.adoc[tags=content]
+include::../../axon-banking/README.adoc[tags=content]
+include::../../axon-complains/README.adoc[tags=content]
 include::../../axon-app/README.adoc[tags=content]
 
 == Jersey JAX-RS

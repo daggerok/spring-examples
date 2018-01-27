@@ -1,100 +1,91 @@
 sudo: required
 group: travis_lts
-
-service: docker
-
+service:
+- docker
 env:
   global:
     TERM=dumb
-
 language: java
 jdk:
-  - openjdk8
-  - oraclejdk8
-
+- openjdk8
+- oraclejdk8
 install: true
 before_install:
-  # docker-compose, curl, jq, httpie
-  - sudo apt update -y || true
-  - sudo apt -y install docker-ce curl jq libxml2-utils python-pip
-  - sudo pip install docker-compose httpie
+# docker-compose, curl, jq, httpie
+- sudo apt update -y || true
+- sudo apt -y install docker-ce curl jq libxml2-utils python-pip
+- sudo pip install docker-compose httpie
 
-  # frontend tests
-  - export CHROME_BIN=/usr/bin/google-chrome
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - sudo apt install -y libappindicator1 fonts-liberation
-  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - sudo dpkg -i google-chrome*.deb
+# frontend tests
+- export CHROME_BIN=/usr/bin/google-chrome
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- sudo apt install -y libappindicator1 fonts-liberation
+- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+- sudo dpkg -i google-chrome*.deb
 
-  # kill ports
-  - source <(curl -fsSL https://raw.github.com/daggerok/bash-functions/master/main.bash)
-  - stop_any 5672 5432 27017 9200 9300 5601 8001 8002 8080 80
+# kill ports
+- source <(curl -fsSL https://raw.github.com/daggerok/bash-functions/master/main.bash)
+- stop_any 5672 5432 27017 9200 9300 5601 8001 8002 8080 80
 
 script:
-  - bash gradlew clean build
-  - export ROOT=$PWD
+- bash gradlew clean build deploy
+- export ROOT=$PWD
 
-  - cd ${ROOT}/http-integration-java-dsl
-  - bash gradlew
-  - java -jar server/build/libs/*.jar &
-  - java -jar client/build/libs/*.jar &
-  - wait_for 8000 8080
-  - http :8080 message=hi!
-  - http :8080/upper-cased message=hi!
-  - http :8080/url-encoded message=hi!
-  - http :8080/jsoned message=hi!
-  - stop_any 8080 8000
+- cd ${ROOT}/http-integration-java-dsl
+- bash gradlew
+- java -jar server/build/libs/*.jar &
+- java -jar client/build/libs/*.jar &
+- wait_for 8000 8080
+- http :8080 message=hi!
+- http :8080/upper-cased message=hi!
+- http :8080/url-encoded message=hi!
+- http :8080/jsoned message=hi!
+- stop_any 8080 8000
 
-  # axon-app
-  - cd ${ROOT}/axon-app
-  # gradle
-  - bash gradlew clean build
-  - java -jar ./build/libs/*.jar &
-  - wait_for 8080
-  - http post :8080/api/v1/orders
-  - http post :8080/api/v1/orders
-  - http get :8080/order-query
-  - http get :8000/map nif=naf nuf=poh
-  - http get :8000 ololo=trololo
-  - stop_any 8080
-  # maven docker
-  - bash mvnw
-  - docker-compose build --force-rm --no-cache --pull
-  - docker-compose up --force-recreate --remove-orphans &
-  - sleep 30
-  - http post :8080/api/v1/orders
-  - http post :8080/api/v1/orders
-  - http get :8080/order-query
-  - docker-compose down -v
+# axon-app
+- cd ${ROOT}/axon-app
+# gradle
+- bash gradlew clean build
+- java -jar ./build/libs/*.jar &
+- wait_for 8080
+- http post :8080/api/v1/orders
+- http post :8080/api/v1/orders
+- http get :8080/order-query
+- http get :8000/map nif=naf nuf=poh
+- http get :8000 ololo=trololo
+- stop_any 8080
+# maven docker
+- bash mvnw
+- docker-compose build --force-rm --no-cache --pull
+- docker-compose up --force-recreate --remove-orphans &
+- sleep 30
+- http post :8080/api/v1/orders
+- http post :8080/api/v1/orders
+- http get :8080/order-query
+- docker-compose down -v
 
-  - >
-    for path in \
-      http-integration-java-dsl \
-      jax-rs-security \
-      jax-rs \
-      09-user-management-es-cqrs \
-      08-axon-complains \
-      07-axon-banking \
-      06-cqrs-and-eventsourcing \
-      04-wro4j \
-      03-retry \
-      02-sse-emitter \
-      01-spring-boot-under-the-hood \
-      ;
-    do
-      export TARGET="$ROOT/$path"
-      cd $TARGET
-      bash gradlew clean build
-    done;
-
-before_cache:
-  - bash gradlew --stop
-  - rm -rf $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
-
+- >
+  for path in \
+    http-integration-java-dsl \
+    jax-rs-security \
+    jax-rs \
+    user-management-es-cqrs \
+    axon-complains \
+    axon-banking \
+    cqrs-and-eventsourcing \
+    wro4j \
+    retry \
+    sse-emitter \
+    spring-boot-under-the-hood \
+    ;
+  do
+    export TARGET="$ROOT/$path"
+    cd $TARGET
+    bash gradlew clean build
+  done;
 cache:
   directories:
-    - $HOME/.m2/
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+  - $HOME/.m2/
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/

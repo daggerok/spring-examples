@@ -1,7 +1,7 @@
 plugins {
   id "base"
   id "org.asciidoctor.convert" version "1.5.3"
-  id "org.ajoberstar.git-publish" version "0.2.2"
+//  id "org.ajoberstar.git-publish" version "0.2.2"
 }
 
 group "daggerok"
@@ -29,6 +29,27 @@ asciidoctor {
       "endpoint-url": "https://daggerok.github.io/spring-examples"
 }
 
+build.dependsOn asciidoctor
+asciidoctor.shouldRunAfter clean
+
+task wrapper(type: Wrapper) {
+  gradleVersion = "4.5"
+  distributionType = "ALL"
+}
+
+task deploy(type: Copy) {
+  from "$buildDir/asciidoc/html5"
+  from "$projectDir/src/static"
+  into "$rootProject.projectDir/docs"
+  dependsOn asciidoctor
+  shouldRunAfter clean, asciidoctor, build
+}
+
+clean.doFirst {
+  delete "$rootProject.projectDir/docs"
+}
+
+/*
 asciidoctor.shouldRunAfter clean
 
 // read more: https://github.com/ajoberstar/gradle-git-publish
@@ -48,3 +69,4 @@ task deploy {
   dependsOn gitPublishPush
   shouldRunAfter clean, build
 }
+*/
