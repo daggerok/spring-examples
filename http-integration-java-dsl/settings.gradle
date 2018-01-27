@@ -1,0 +1,3 @@
+rootProject.name = "http-integration-java-dsl"
+include "server"
+include "client"

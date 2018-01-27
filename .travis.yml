@@ -37,10 +37,14 @@ script:
 
   - cd ${ROOT}/http-integration-java-dsl
   - bash gradlew
-  - java -jar build/libs/*.jar &
-  - wait_for 8080
-  - http :8080 key=value1 key=value2 k=v
-  - stop_any 8080
+  - java -jar server/build/libs/*.jar &
+  - java -jar client/build/libs/*.jar &
+  - wait_for 8000 8080
+  - http :8080 message=hi!
+  - http :8080/upper-cased message=hi!
+  - http :8080/url-encoded message=hi!
+  - http :8080/jsoned message=hi!
+  - stop_any 8080 8000
 
   # axon-app
   - cd ${ROOT}/axon-app
