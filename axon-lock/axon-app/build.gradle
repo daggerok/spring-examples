@@ -1,0 +1,11 @@
+apply plugin: "org.springframework.boot"
+
+dependencies {
+  compile("org.springframework.boot:spring-boot-starter-web")
+  compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+  compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+  compile("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
+  compile("org.axonframework:axon-spring-boot-starter:$axonVersion")
+  compile("org.axonframework:axon-mongo:$axonVersion")
+  testCompile("org.axonframework:axon-test:$axonVersion")
+}
