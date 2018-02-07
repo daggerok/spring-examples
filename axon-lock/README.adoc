@@ -48,12 +48,9 @@ http delete http://localhost:8080/api/v1/entrance/reception
 http delete http://localhost:8080/api/v1/entrance/main
 ----
 
-.build
+.docker compose
 ----
-./mvnw clean package com.dkanejs.maven.plugins:docker-compose-maven-plugin:1.0.1:up
-./mvnw com.dkanejs.maven.plugins:docker-compose-maven-plugin:1.0.1:down
-
-./gradlew clean build composeUp
+./gradlew build composeUp
 ./gradlew composeDown
 ----
 

@@ -1,0 +1,45 @@
+version: "2.1"
+
+services:
+
+  axon-app:
+    build:
+      context: ./axon-app
+      dockerfile: gradle/Dockerfile
+    volumes:
+      - "axon-app-data:/home/appuser"
+      - "axon-app-data:/var"
+      - "axon-app-data:/tmp"
+    networks: [backing-services]
+    ports: ["8080:8080"]
+    #restart: unless-stopped
+    mem_limit: 838860800 # container limit: 800Mb (800 * 1024 * 1024)
+
+  es-client:
+    build:
+      context: ./es-client
+      dockerfile: gradle/Dockerfile
+    volumes: ["es-client-data:/home/appuser"]
+    networks: [backing-services]
+    ports: ["8888:8888"]
+    #restart: unless-stopped
+    mem_limit: 209715200 # container limit: 200Mb (200 * 1024 * 1024)
+
+  reactive-client:
+    build:
+      context: ./reactive-client
+      dockerfile: gradle/Dockerfile
+    volumes: ["reactive-client-data:/home/appuser"]
+    networks: [backing-services]
+    ports: ["8000:8000"]
+    #restart: unless-stopped
+    mem_limit: 209715200 # container limit: 200Mb (200 * 1024 * 1024)
+
+volumes:
+  axon-app-data: {}
+  es-client-data: {}
+  reactive-client-data: {}
+
+networks:
+  backing-services:
+    driver: bridge

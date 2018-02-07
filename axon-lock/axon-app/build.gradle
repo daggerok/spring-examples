@@ -1,11 +1,37 @@
+buildscript {
+  ext {
+    axonVersion = "3.1.2"
+    springBootVersion = "1.5.10.RELEASE"
+  }
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+  }
+}
+
 apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
 
 dependencies {
+  compileOnly("org.projectlombok:lombok")
   compile("org.springframework.boot:spring-boot-starter-web")
+  compile("org.springframework.boot:spring-boot-starter-actuator")
   compile("org.springframework.boot:spring-boot-starter-data-mongodb")
   compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
   compile("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
   compile("org.axonframework:axon-spring-boot-starter:$axonVersion")
   compile("org.axonframework:axon-mongo:$axonVersion")
+/*
+  compile("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
+  compile("com.fasterxml.jackson.module:jackson-module-kotlin") {
+    exclude module: "kotlin-stdlib"
+  }
+*/
   testCompile("org.axonframework:axon-test:$axonVersion")
+  testCompile("org.springframework.boot:spring-boot-starter-test")
 }

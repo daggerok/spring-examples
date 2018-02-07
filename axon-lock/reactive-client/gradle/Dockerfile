@@ -14,8 +14,8 @@ ENTRYPOINT java -XX:+UnlockExperimentalVMOptions \
                 -XshowSettings:vm \
                 -jar ./app.jar
 CMD /bin/bash
-EXPOSE 8080
+EXPOSE 8000
 HEALTHCHECK --timeout=1s \
             --retries=35 \
-            CMD curl -f http://127.0.0.1:8080/actuator/health || exit 1
-COPY --chown=appuser ./target/*.jar ./app.jar
+            CMD curl -f http://127.0.0.1:8000/actuator/health || exit 1
+COPY --chown=appuser ./build/libs/*.jar ./app.jar

@@ -1,2 +1,4 @@
 rootProject.name = "axon-lock"
 include "axon-app"
+include "reactive-client"
+include "es-client"
