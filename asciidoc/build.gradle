@@ -45,6 +45,8 @@ task deploy(type: Copy) {
   shouldRunAfter clean, asciidoctor, build
 }
 
+task docs(dependsOn: deploy)
+
 clean.doFirst {
   delete "$rootProject.projectDir/docs"
 }

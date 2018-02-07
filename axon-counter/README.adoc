@@ -1,0 +1,28 @@
+= axon-lock
+
+//tag::content[]
+
+Axon / Spring-boot using Kotlin
+
+.build, run, test
+----
+./mvnw
+
+java -jar target/*.jar
+
+http post :8080/api/v1/counter\? counterId=c
+http put  :8080/api/v1/counter/c/enable
+http put  :8080/api/v1/counter/c/increment
+http put  :8080/api/v1/counter/c/decrement\?amount=2
+
+http :8080
+http :8080\?collection=events
+----
+
+.docker compose
+----
+./gradlew build composeUp
+./gradlew composeDown
+----
+
+//end::content[]

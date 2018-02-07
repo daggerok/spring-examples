@@ -540,7 +540,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">Maksim Kostromin</span><br>
 <span id="email" class="email"><a href="mailto:daggerok@gmail.com">daggerok@gmail.com</a></span><br>
 <span id="revnumber">version 0.4.1,</span>
-<span id="revdate">2018-01-27 22:05:03 EET</span>
+<span id="revdate">2018-02-08 01:52:20 EET</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1326,6 +1326,94 @@ http post :8080/api/v1/orders
 http :8080/order-query</pre>
 </div>
 </div>
+<div class="paragraph">
+<p>FIXME: Failed with snapshots threshold&#8230;&#8203;</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>MongoDB + Axon Framework App</p>
+</li>
+<li>
+<p>Maven / Gradle Kotlin configuration</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="title">build, run, test</div>
+<div class="content">
+<pre>./gradlew
+
+java -jar axon-app/build/libs/*.jar
+java -jar reactive-client/build/libs/*.jar --server.port=8000
+java -jar es-client/build/libs/*.jar --server.port=8888
+
+# create main entrance
+http :8080/api/v1/entrance/register entranceId=main
+
+# stream event client
+#http --stream --timeout=123456 :8000
+curl localhost:8000
+
+# unlock main entrance
+http put http://localhost:8080/api/v1/entrance/main/unlock
+
+# create and unlock reception entrance
+http :8080/api/v1/entrance/register entranceId=reception
+http put http://localhost:8080/api/v1/entrance/reception/unlock
+
+http :8080/api/v1/guest/register name=max
+# ...
+Location: http://localhost:8080/api/v1/guest/646fa336-dda6-4fdd-be38-05179ecd44e7/activate
+
+http put http://localhost:8080/api/v1/guest/646fa336-dda6-4fdd-be38-05179ecd44e7/activate
+
+# enter inside building / door
+http post http://localhost:8080/api/v1/entrance/main/enter/646fa336-dda6-4fdd-be38-05179ecd44e7
+http post http://localhost:8080/api/v1/entrance/reception/enter/646fa336-dda6-4fdd-be38-05179ecd44e7
+http post http://localhost:8080/api/v1/entrance/reception/exit/646fa336-dda6-4fdd-be38-05179ecd44e7
+http post http://localhost:8080/api/v1/entrance/main/exit/646fa336-dda6-4fdd-be38-05179ecd44e7
+
+http :8888
+http :8888 accept:application/json
+
+http delete http://localhost:8080/api/v1/entrance/reception
+http delete http://localhost:8080/api/v1/entrance/main</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">docker compose</div>
+<div class="content">
+<pre>./gradlew build composeUp
+./gradlew composeDown</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Axon / Spring-boot using Kotlin</p>
+</div>
+<div class="listingblock">
+<div class="title">build, run, test</div>
+<div class="content">
+<pre>./mvnw
+
+java -jar target/*.jar
+
+http post :8080/api/v1/counter\? counterId=c
+http put  :8080/api/v1/counter/c/enable
+http put  :8080/api/v1/counter/c/increment
+http put  :8080/api/v1/counter/c/decrement\?amount=2
+
+http :8080
+http :8080\?collection=events</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">docker compose</div>
+<div class="content">
+<pre>./gradlew build composeUp
+./gradlew composeDown</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1389,7 +1477,7 @@ http --auth admin:change-me :8080/2
 <div id="footer">
 <div id="footer-text">
 Version 0.4.1<br>
-Last updated 2018-01-27 22:05:03 EET
+Last updated 2018-02-08 01:52:20 EET
 </div>
 </div>
 </body>
