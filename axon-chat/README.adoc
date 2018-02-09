@@ -1,0 +1,43 @@
+= axon-chat
+
+//tag::content[]
+
+In fucking progress..
+
+. axon
+. spring-boot 1.x
+. mongodb
+. kotlin
+. gradle
+. maven
+
+.build, run, test
+----
+./mvnw # or
+java -jar target/*.jar
+
+./gradlew
+java -jar build/libs/*.jar
+
+http :8080/api/room
+http :8080/api/room roomId=my-room
+http :8080/api/room/my-room
+http put :8080/api/room/my-room/max
+http put :8080/api/room/my-room/valery
+http :8080/api/member
+http delete :8080/api/room/my-room/max
+http delete :8080/api/room/my-room/valery
+http :8080\?collection=events
+----
+
+.docker compose
+----
+./gradlew build composeUp
+./gradlew composeDown
+----
+
+links:
+
+. link:https://www.youtube.com/watch?v=IhLSwCRyrcw[Live coding building and distributing an Axon 3 based application]
+
+//end::content[]

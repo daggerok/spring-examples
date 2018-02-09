@@ -540,7 +540,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">Maksim Kostromin</span><br>
 <span id="email" class="email"><a href="mailto:daggerok@gmail.com">daggerok@gmail.com</a></span><br>
 <span id="revnumber">version 0.4.1,</span>
-<span id="revdate">2018-02-08 01:52:20 EET</span>
+<span id="revdate">2018-02-10 01:13:58 EET</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1414,6 +1414,65 @@ http :8080\?collection=events</pre>
 ./gradlew composeDown</pre>
 </div>
 </div>
+<div class="paragraph">
+<p>In fucking progress..</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>axon</p>
+</li>
+<li>
+<p>spring-boot 1.x</p>
+</li>
+<li>
+<p>mongodb</p>
+</li>
+<li>
+<p>kotlin</p>
+</li>
+<li>
+<p>gradle</p>
+</li>
+<li>
+<p>maven</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="title">build, run, test</div>
+<div class="content">
+<pre>./mvnw # or
+java -jar target/*.jar
+
+./gradlew
+java -jar build/libs/*.jar
+
+http :8080/api/chat
+http :8080/api/chat chatId=my-chat
+http :8080/api/chat/my-chat
+
+http :8080
+http :8080\?collection=events</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">docker compose</div>
+<div class="content">
+<pre>./gradlew build composeUp
+./gradlew composeDown</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>links:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="https://www.youtube.com/watch?v=IhLSwCRyrcw">Live coding building and distributing an Axon 3 based application</a></p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 </div>
@@ -1477,7 +1536,7 @@ http --auth admin:change-me :8080/2
 <div id="footer">
 <div id="footer-text">
 Version 0.4.1<br>
-Last updated 2018-02-08 01:52:20 EET
+Last updated 2018-02-10 01:13:58 EET
 </div>
 </div>
 </body>

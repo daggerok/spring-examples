@@ -40,6 +40,7 @@ include::../../axon-complains/README.adoc[tags=content]
 include::../../axon-app/README.adoc[tags=content]
 include::../../axon-lock/README.adoc[tags=content]
 include::../../axon-counter/README.adoc[tags=content]
+include::../../axon-chat/README.adoc[tags=content]
 
 == Jersey JAX-RS
 include::../../jax-rs/README.adoc[tags=content]

@@ -11,11 +11,9 @@ jdk:
 - oraclejdk8
 install: true
 before_install:
-# docker-compose, curl, jq, httpie
 - sudo apt update -y || true
 - sudo apt install -y --no-install-recommends docker-ce curl jq libxml2-utils python-pip
 - sudo pip install docker-compose httpie
-
 # frontend tests
 - export CHROME_BIN=/usr/bin/google-chrome
 - export DISPLAY=:99.0
@@ -23,14 +21,43 @@ before_install:
 - sudo apt install -y libappindicator1 fonts-liberation
 - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 - sudo dpkg -i google-chrome*.deb
-
 # kill ports
 - source <(curl -fsSL https://raw.github.com/daggerok/bash-functions/master/main.bash)
-- stop_any 5672 5432 27017 9200 9300 5601 8001 8002 8080 80
+- stop_any 5672 5432 27017 9200 9300 5601 8000 8001 8002 8080 80
 
 script:
 - bash gradlew clean build deploy
 - export ROOT=$PWD
+
+- cd ${ROOT}/axon-chat
+- rm -rf build target
+- bash gradlew
+- java -jar build/libs/*.jar &
+- wait_for 8080
+- http :8080/api/room
+- http :8080/api/room roomId=my-room
+- http :8080/api/room/my-room
+- http put :8080/api/room/my-room/max
+- http put :8080/api/room/my-room/valery
+- http :8080/api/member
+- http delete :8080/api/room/my-room/max
+- http delete :8080/api/room/my-room/valery
+- http :8080\?collection=events
+- stop_any 8080
+- rm -rf build target
+- bash mvnw
+- java -jar target/*.jar &
+- wait_for 8080
+- http :8080/api/room
+- http :8080/api/room roomId=my-room
+- http :8080/api/room/my-room
+- http put :8080/api/room/my-room/max
+- http put :8080/api/room/my-room/valery
+- http :8080/api/member
+- http delete :8080/api/room/my-room/max
+- http delete :8080/api/room/my-room/valery
+- http :8080\?collection=events
+- stop_any 8080
 
 - cd ${ROOT}/axon-counter
 - bash mvnw
