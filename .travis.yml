@@ -42,7 +42,7 @@ script:
 - http :8080/api/member
 - http delete :8080/api/room/my-room/max
 - http delete :8080/api/room/my-room/valery
-- http :8080\?collection=events
+- http :8080/my-room
 - stop_any 8080
 - rm -rf build target
 - bash mvnw
@@ -56,7 +56,7 @@ script:
 - http :8080/api/member
 - http delete :8080/api/room/my-room/max
 - http delete :8080/api/room/my-room/valery
-- http :8080\?collection=events
+- http :8080/my-room
 - stop_any 8080
 
 - cd ${ROOT}/axon-counter
