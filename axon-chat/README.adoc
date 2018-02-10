@@ -39,5 +39,6 @@ http :8080\?collection=events
 links:
 
 . link:https://www.youtube.com/watch?v=IhLSwCRyrcw[Live coding building and distributing an Axon 3 based application]
+. link:https://github.com/AxonIQ/axon-quick-start/tree/solution[GIthub: AxonIQ/axon-quick-start]
 
 //end::content[]
