@@ -1,7 +1,6 @@
 plugins {
   id "base"
   id "org.asciidoctor.convert" version "1.5.3"
-//  id "org.ajoberstar.git-publish" version "0.2.2"
 }
 
 group "daggerok"
@@ -50,25 +49,3 @@ task docs(dependsOn: deploy)
 clean.doFirst {
   delete "$rootProject.projectDir/docs"
 }
-
-/*
-asciidoctor.shouldRunAfter clean
-
-// read more: https://github.com/ajoberstar/gradle-git-publish
-gitPublish {
-  repoUri = "git@github.com:daggerok/spring-examples.git"
-  branch = "gh-pages"
-  contents {
-    from "$buildDir/asciidoc/html5"
-    from "$projectDir/src/static"
-    into "."
-  }
-}
-
-build. dependsOn asciidoctor
-
-task deploy {
-  dependsOn gitPublishPush
-  shouldRunAfter clean, build
-}
-*/

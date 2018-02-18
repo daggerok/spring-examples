@@ -29,47 +29,58 @@ script:
 - bash gradlew clean build deploy
 - export ROOT=$PWD
 
-- cd ${ROOT}/axon-chat
-- rm -rf build target
-- bash gradlew
-- java -jar build/libs/*.jar &
-- wait_for 8080
-- http :8080/api/room
-- http :8080/api/room roomId=my-room
-- http :8080/api/room/my-room
-- http put :8080/api/room/my-room/max
-- http put :8080/api/room/my-room/valery
-- http :8080/api/member
-- http delete :8080/api/room/my-room/max
-- http delete :8080/api/room/my-room/valery
-- http :8080/my-room
-- stop_any 8080
-- rm -rf build target
+- cd ${ROOT}/axon-vote
 - bash mvnw
-- java -jar target/*.jar &
+- bash target/*.jar &
 - wait_for 8080
-- http :8080/api/room
-- http :8080/api/room roomId=my-room
-- http :8080/api/room/my-room
-- http put :8080/api/room/my-room/max
-- http put :8080/api/room/my-room/valery
-- http :8080/api/member
-- http delete :8080/api/room/my-room/max
-- http delete :8080/api/room/my-room/valery
-- http :8080/my-room
+- http :8080/api/v1/registration id=my-vote name=my=vote
+- http put http://localhost:8080/api/v1/registration/approve/my-vote
+- http post http://localhost:8080/api/v1/vote/my-vote electorId=dag
+- http post http://localhost:8080/api/v1/vote/my-vote electorId=max
+- http :8080
 - stop_any 8080
 
-- cd ${ROOT}/axon-counter
-- bash mvnw
-- java -jar target/*.jar &
-- wait_for 8080
-- http post :8080/api/v1/counter\? counterId=c
-- http put  :8080/api/v1/counter/c/enable
-- http post :8080/api/v1/counter/c/increment
-- http post :8080/api/v1/counter/c/decrement\?amount=2
-- http get  :8080
-- http get  :8080\?collection=events
-- stop_any 8080
+#- cd ${ROOT}/axon-chat
+#- rm -rf build target
+#- bash gradlew
+#- java -jar build/libs/*.jar &
+#- wait_for 8080
+#- http :8080/api/room
+#- http :8080/api/room roomId=my-room
+#- http :8080/api/room/my-room
+#- http put :8080/api/room/my-room/max
+#- http put :8080/api/room/my-room/valery
+#- http :8080/api/member
+#- http delete :8080/api/room/my-room/max
+#- http delete :8080/api/room/my-room/valery
+#- http :8080/my-room
+#- stop_any 8080
+#- rm -rf build target
+#- bash mvnw
+#- java -jar target/*.jar &
+#- wait_for 8080
+#- http :8080/api/room
+#- http :8080/api/room roomId=my-room
+#- http :8080/api/room/my-room
+#- http put :8080/api/room/my-room/max
+#- http put :8080/api/room/my-room/valery
+#- http :8080/api/member
+#- http delete :8080/api/room/my-room/max
+#- http delete :8080/api/room/my-room/valery
+#- http :8080/my-room
+#- stop_any 8080
+#
+#- cd ${ROOT}/axon-counter
+#- bash mvnw
+#- java -jar target/*.jar &
+#- wait_for 8080
+#- http post :8080/api/v1/counter\? counterId=c
+#- http put  :8080/api/v1/counter/c/enable
+#- http post :8080/api/v1/counter/c/increment
+#- http post :8080/api/v1/counter/c/decrement\?amount=2
+#- http get  :8080
+#- http get  :8080\?collection=events
+#- stop_any 8080
 
 - cd ${ROOT}/axon-lock
 - bash gradlew

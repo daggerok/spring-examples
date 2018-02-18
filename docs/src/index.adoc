@@ -41,10 +41,14 @@ include::../../axon-app/README.adoc[tags=content]
 include::../../axon-lock/README.adoc[tags=content]
 include::../../axon-counter/README.adoc[tags=content]
 include::../../axon-chat/README.adoc[tags=content]
+include::../../axon-vote/README.adoc[tags=content]
 
 == Jersey JAX-RS
 include::../../jax-rs/README.adoc[tags=content]
 include::../../jax-rs-security/README.adoc[tags=content]
+
+== Other projects
+. link:https://github.com/daggerok/csrf-spring-webflux-mustache/[Webflux, Reactive security, CSRF, etc..]
 
 == links
 include::includes/Links.adoc[]
