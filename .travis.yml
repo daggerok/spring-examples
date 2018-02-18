@@ -84,13 +84,15 @@ script:
 
 - cd ${ROOT}/axon-lock
 - bash gradlew
+- bash gradlew -b axon-app/build.gradle
 - bash gradlew -b reactive-client/build.gradle
 - bash gradlew -b es-client/build.gradle
+- stop_any 8080 8000 80
 - java -jar axon-app/build/libs/*.jar &
 - wait_for 8080
 - java -jar reactive-client/build/libs/*.jar --server.port=8000 &
 - java -jar es-client/build/libs/*.jar --server.port=8888 &
-- wait_for 8000 8888
+- wait_for 8000 8080 8888
 - http :8080/api/v1/entrance/register entranceId=main
 - curl localhost:8000 &
 - http --stream --timeout=123456 :8000 &
@@ -102,7 +104,7 @@ script:
 - http delete http://localhost:8080/api/v1/entrance/reception
 - http delete http://localhost:8080/api/v1/entrance/main
 - sleep 1
-- stop_any 8080 8000
+- stop_any 8080 8000 80
 
 - cd ${ROOT}/http-integration-java-dsl
 - bash gradlew
