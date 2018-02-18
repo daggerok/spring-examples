@@ -540,7 +540,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">Maksim Kostromin</span><br>
 <span id="email" class="email"><a href="mailto:daggerok@gmail.com">daggerok@gmail.com</a></span><br>
 <span id="revnumber">version 0.5.0,</span>
-<span id="revdate">2018-02-18 21:47:42 EET</span>
+<span id="revdate">2018-02-18 23:33:48 EET</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1475,6 +1475,9 @@ http :8080\?collection=events</pre>
 <li>
 <p><a href="https://www.youtube.com/watch?v=IhLSwCRyrcw">Live coding building and distributing an Axon 3 based application</a></p>
 </li>
+<li>
+<p><a href="https://github.com/AxonIQ/axon-quick-start/tree/solution">GIthub: AxonIQ/axon-quick-start</a></p>
+</li>
 </ol>
 </div>
 <div class="paragraph">
@@ -1520,17 +1523,14 @@ http post :8080/api/v1/counter\?counterId=my-counter
 http put :8080//api/v1/counter/my-counter/enable
 http post :8080//api/v1/counter/my-counter/increment
 http post :8080//api/v1/counter/my-counter/increment
+http :8080
 # counter end
 
-http :8080
-http :8080\?collection=events</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">docker compose</div>
-<div class="content">
-<pre>./gradlew build composeUp
-./gradlew composeDown</pre>
+# show all events
+http :8080\?collection=events
+
+# show all snapshots
+http :8080 # same as http :8080\?collection=snapshots</pre>
 </div>
 </div>
 </div>
@@ -1608,7 +1608,7 @@ http --auth admin:change-me :8080/2
 <div id="footer">
 <div id="footer-text">
 Version 0.5.0<br>
-Last updated 2018-02-18 21:47:42 EET
+Last updated 2018-02-18 23:33:48 EET
 </div>
 </div>
 </body>
