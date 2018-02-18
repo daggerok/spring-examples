@@ -3,6 +3,7 @@
 This repository is contains some spring / spring-boot playground projects
 
 . link:axon-vote/[Axon Framework - Voting App]
+. link:https://github.com/daggerok/spring-boot-async[async]
 . link:spring-boot-under-the-hood/[Spring boot conditions, auto-configurations and custom starter]
 . link:sse-emitter/[Server-side events / SSE emitter]
 . link:retry/[Retry mechanism]
