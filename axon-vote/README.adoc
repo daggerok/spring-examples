@@ -43,16 +43,14 @@ http post :8080/api/v1/counter\?counterId=my-counter
 http put :8080//api/v1/counter/my-counter/enable
 http post :8080//api/v1/counter/my-counter/increment
 http post :8080//api/v1/counter/my-counter/increment
+http :8080
 # counter end
 
-http :8080
+# show all events
 http :8080\?collection=events
-----
 
-.docker compose
-----
-./gradlew build composeUp
-./gradlew composeDown
+# show all snapshots
+http :8080 # same as http :8080\?collection=snapshots
 ----
 
 //end::content[]
