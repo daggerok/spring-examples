@@ -26,7 +26,7 @@ before_install:
 - stop_any 5672 5432 27017 9200 9300 5601 8000 8001 8002 8080 80
 
 script:
-- bash gradlew clean build deploy
+- bash gradlew clean build asciidoctor
 - export ROOT=$PWD
 
 - cd ${ROOT}/axon-vote
