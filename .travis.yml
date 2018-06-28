@@ -1,26 +1,33 @@
-sudo: required
-group: travis_lts
 service:
 - docker
+
 env:
   global:
     TERM=dumb
+
 language: java
-jdk:
-- openjdk8
-- oraclejdk8
+jdk: oraclejdk8
+
+addons:
+  apt:
+    update: true
+    packages:
+    - docker-ce
+    - curl
+    - jq
+    - python-pip
+    - libxml2-utils
+    - libappingicator1
+    - fonts-liberation
+    - google-chrome-stable
+
 install: true
 before_install:
-- sudo apt update -y || true
-- sudo apt install -y --no-install-recommends docker-ce curl jq libxml2-utils python-pip
 - sudo pip install docker-compose httpie
 # frontend tests
 - export CHROME_BIN=/usr/bin/google-chrome
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
-- sudo apt install -y libappindicator1 fonts-liberation
-- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-- sudo dpkg -i google-chrome*.deb
 # kill ports
 - source <(curl -fsSL https://raw.github.com/daggerok/bash-functions/master/main.bash)
 - stop_any 5672 5432 27017 9200 9300 5601 8000 8001 8002 8080 80
