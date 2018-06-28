@@ -13,9 +13,9 @@ addons:
     update: true
     packages:
     - docker-ce
+    - python-pip
     - curl
     - jq
-    - python-pip
     - libxml2-utils
     - libappingicator1
     - fonts-liberation
@@ -23,7 +23,7 @@ addons:
 
 install: true
 before_install:
-- sudo pip install docker-compose httpie
+- sudo pip install docker-compose httpie >/dev/null
 # frontend tests
 - export CHROME_BIN=/usr/bin/google-chrome
 - export DISPLAY=:99.0
