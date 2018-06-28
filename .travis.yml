@@ -17,7 +17,7 @@ addons:
     - curl
     - jq
     - libxml2-utils
-    - libappingicator1
+    - libappindicator1
     - fonts-liberation
     - google-chrome-stable
 
