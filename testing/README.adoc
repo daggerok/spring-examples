@@ -7,7 +7,7 @@ TODO: In progress...
 .testing
 [source,bash]
 ----
-bash gradlew clean test
+./gradlew clean test
 ----
 
 === mokito
@@ -21,7 +21,7 @@ include::mokito/src/test/java/daggerok/mokito/MokitoTest.java[tags=content]
 .mokito testing
 [source,bash]
 ----
-bash gradlew clean m:test
+./gradlew clean m:test
 ----
 
 //end::content[]

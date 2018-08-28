@@ -6,8 +6,8 @@ _Spring Cloud Stream | CQRS and Event Sourcing_
 
 [source,bash]
 ----
-bash gradlew clean build
-bash gradlew bootRun --parallel
+./gradlew clean build
+./gradlew bootRun --parallel
 open http://localhost:8001
 ----
 

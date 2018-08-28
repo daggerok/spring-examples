@@ -5,7 +5,7 @@
 
 [source,bash]
 ----
-bash gradlew bootRun
+./gradlew bootRun
 
 # rest
 http :8080

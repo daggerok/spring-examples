@@ -33,11 +33,11 @@ before_install:
 - stop_any 5672 5432 27017 9200 9300 5601 8000 8001 8002 8080 80
 
 script:
-- bash gradlew clean build asciidoctor
+- ./gradlew clean build asciidoctor
 - export ROOT=$PWD
 
 - cd ${ROOT}/axon-vote
-- bash mvnw
+- ./mvnw
 - bash target/*.jar &
 - wait_for 8080
 - http :8080/api/v1/registration id=my-vote name=my=vote
@@ -49,7 +49,7 @@ script:
 
 #- cd ${ROOT}/axon-chat
 #- rm -rf build target
-#- bash gradlew
+#- ./gradlew
 #- java -jar build/libs/*.jar &
 #- wait_for 8080
 #- http :8080/api/room
@@ -63,7 +63,7 @@ script:
 #- http :8080/my-room
 #- stop_any 8080
 #- rm -rf build target
-#- bash mvnw
+#- ./mvnw
 #- java -jar target/*.jar &
 #- wait_for 8080
 #- http :8080/api/room
@@ -78,7 +78,7 @@ script:
 #- stop_any 8080
 #
 #- cd ${ROOT}/axon-counter
-#- bash mvnw
+#- ./mvnw
 #- java -jar target/*.jar &
 #- wait_for 8080
 #- http post :8080/api/v1/counter\? counterId=c
@@ -90,10 +90,10 @@ script:
 #- stop_any 8080
 
 - cd ${ROOT}/axon-lock
-- bash gradlew
-- bash gradlew -b axon-app/build.gradle
-- bash gradlew -b reactive-client/build.gradle
-- bash gradlew -b es-client/build.gradle
+- ./gradlew
+- ./gradlew -b axon-app/build.gradle
+- ./gradlew -b reactive-client/build.gradle
+- ./gradlew -b es-client/build.gradle
 - stop_any 8080 8000 80
 - java -jar axon-app/build/libs/*.jar &
 - wait_for 8080
@@ -114,7 +114,7 @@ script:
 - stop_any 8080 8000 80
 
 - cd ${ROOT}/http-integration-java-dsl
-- bash gradlew
+- ./gradlew
 - java -jar server/build/libs/*.jar &
 - java -jar client/build/libs/*.jar &
 - wait_for 8000 8080
@@ -130,7 +130,7 @@ script:
 # axon-app
 - cd ${ROOT}/axon-app
 # gradle
-- bash gradlew clean build
+- ./gradlew clean build
 - java -jar ./build/libs/*.jar &
 - wait_for 8080
 - http post :8080/api/v1/orders
@@ -138,7 +138,7 @@ script:
 - http get :8080/order-query
 - stop_any 8080
 # maven docker
-- bash mvnw
+- ./mvnw
 - docker-compose build --force-rm --no-cache --pull
 - docker-compose up --force-recreate --remove-orphans &
 - sleep 30
@@ -164,5 +164,5 @@ script:
   do
     export TARGET="$ROOT/$path"
     cd $TARGET
-    bash gradlew clean build
+    ./gradlew clean build
   done;

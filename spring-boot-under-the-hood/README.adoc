@@ -8,7 +8,7 @@ This example is about spring-boot in general, not only 5th...
 
 [source,bash]
 ----
-bash gradlew -t bootRun
+./gradlew -t bootRun
 ----
 
 === spring-boot POWER

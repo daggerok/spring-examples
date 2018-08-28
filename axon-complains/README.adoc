@@ -6,7 +6,7 @@ _Axon complaints app_
 
 [source,bash]
 ----
-bash gradlew bootRun
+./gradlew bootRun
 http :8080
 http post :8080 company=first description="oh, no!"
 http :8080/uuid...

@@ -7,7 +7,7 @@
 .bootstrap app
 [source,bash]
 ----
-bash gradlew clean build bootRun
+./gradlew clean build bootRun
 ----
 
 .sucess response response

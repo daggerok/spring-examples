@@ -7,7 +7,7 @@
 .bootstrap
 [source,bash]
 ----
-bash gradlew bootRun
+./gradlew bootRun
 ----
 
 .get initial

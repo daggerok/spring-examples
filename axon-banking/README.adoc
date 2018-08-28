@@ -9,7 +9,7 @@ _Axon banking app_
 .start app, open 2 browser windows and start chatting
 [source,bash]
 ----
-bash gradlew bootRun
+./gradlew bootRun
 open http://localhost:8001 # browser 1
 open http://localhost:8001 # browser 2
 ----
