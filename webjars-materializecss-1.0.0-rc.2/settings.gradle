@@ -1,0 +1,3 @@
+rootProject.name = 'webjars-materializecss-1_0_0-rc_2'
+enableFeaturePreview 'STABLE_PUBLISHING'
+include 'docs'

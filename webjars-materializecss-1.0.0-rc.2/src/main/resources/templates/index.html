@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Materialize CSS</title>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+  <link rel="stylesheet" href="/webjars/material-design-icons/3.0.1/material-icons.css">
+  <link rel="stylesheet" href="/webjars/materializecss/1.0.0-rc.2/css/materialize.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+
+<nav> o-la-la! <!-- navbar content here  --> </nav>
+
+<ul id="slide-out" class="sidenav">
+  <li><div class="user-view">
+    <div class="background">
+      <img src="images/office.jpg">
+    </div>
+    <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
+    <a href="#name"><span class="white-text name">John Doe</span></a>
+    <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+  </div></li>
+  <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+  <li><a href="#!">Second Link</a></li>
+  <li><div class="divider"></div></li>
+  <li><a class="subheader">Subheader</a></li>
+  <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+</ul>
+<a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, options);
+  });
+
+  // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
+  // var collapsibleElem = document.querySelector('.collapsible');
+  // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
+</script>
+
+
+<h1>ololo</h1>
+<p>trololo</p>
+
+
+<a class="waves-effect waves-light btn-large" href="#">Wave</a>
+
+
+<ul class="collapsible">
+  <li>
+    <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+  </li>
+  <li>
+    <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+  </li>
+  <li>
+    <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+  </li>
+</ul>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, options);
+  });
+</script>
+
+
+<!-- Dropdown Trigger -->
+<a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Drop Me!</a>
+
+<!-- Dropdown Structure -->
+<ul id='dropdown1' class='dropdown-content'>
+  <li><a href="#!">one</a></li>
+  <li><a href="#!">two</a></li>
+  <li class="divider" tabindex="-1"></li>
+  <li><a href="#!">three</a></li>
+  <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+  <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+</ul>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems, options);
+  });
+</script>
+
+
+<!-- Element Showed -->
+<a id="menu" class="waves-effect waves-light btn btn-floating" ><i class="material-icons">menu</i></a>
+
+<!-- Tap Target Structure -->
+<div class="tap-target" data-target="menu">
+  <div class="tap-target-content">
+    <h5>Title</h5>
+    <p>A bunch of text</p>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.tap-target');
+    var instances = M.TapTarget.init(elems, options);
+  });
+</script>
+
+
+<!-- Modal Trigger -->
+<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4>Modal Header</h4>
+    <p>A bunch of text</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, options);
+  });
+</script>
+
+
+<script src="/webjars/materializecss/1.0.0-rc.2/js/materialize.js"></script>
+<script>M.AutoInit();</script>
+</body>
+</html>
