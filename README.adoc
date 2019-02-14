@@ -2,6 +2,7 @@
 
 This repository is contains some spring / spring-boot playground projects
 
+- link:https://github.com/daggerok/spring-security-java-ee-microprofile[Spring Security JavaEE integration]
 - link:./webjars-materializecss-1.0.0-rc.2/[webjars materializecss version: 1.0.0-rc.2]
 - link:https://github.com/daggerok/spring-boot-http2[HTTP 2.0 (spring-boot 2, java 9+)]
 - link:axon-vote/[Axon Framework - Voting App]
